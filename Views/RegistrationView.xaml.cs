@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace BookShopCore.Views
 {
   /// <summary>
-  /// Логика взаимодействия для Registration.xaml
+  /// Логика взаимодействия для RegistrationView.xaml
   /// </summary>
-  public partial class Registration : Page
+  public partial class RegistrationView : Page
   {
-    public Registration()
+    public RegistrationView()
     {
       InitializeComponent();
     }
