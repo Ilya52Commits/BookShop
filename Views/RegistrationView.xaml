@@ -3,11 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BookShopCore.Views" xmlns:viewModels="clr-namespace:BookShopCore.ViewModels"
+      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels"
       mc:Ignorable="d"
       d:DesignHeight="680" d:DesignWidth="800"
       Title="RegistrationView">
-    
+
+    <Page.DataContext >
+        <viewModels:RegistrationViewModel/>
+    </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -23,15 +26,15 @@
                         <Label Content="РЕГИСТРАЦИЯ" FontSize="20" HorizontalContentAlignment="Center" />
                         <StackPanel Margin="0, 10, 0, 0">
                             <TextBlock Text="Логин" FontSize="20" />
-                            <TextBox x:Name="Login" Style="{DynamicResource TextBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
+                            <TextBox Text="{Binding Login}" Style="{DynamicResource TextBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
                         </StackPanel>
                         <StackPanel Margin="0, 10, 0, 0">
                             <TextBlock Text="Email" FontSize="20" />
-                            <TextBox x:Name="Email" Style="{DynamicResource TextBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
+                            <TextBox Text="{Binding Email}" Style="{DynamicResource TextBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
                         </StackPanel>
                         <StackPanel Margin="0, 10, 0, 0">
                             <TextBlock Text="Пароль" FontSize="20" />
-                            <PasswordBox x:Name="Password" Style="{DynamicResource PasswordBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
+                            <PasswordBox  Style="{DynamicResource PasswordBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
                         </StackPanel>
                         <StackPanel Margin="0, 10, 0, 0">
                             <TextBlock Text="Повторите пароль" FontSize="20" />
