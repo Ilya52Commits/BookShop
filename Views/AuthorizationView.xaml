@@ -1,0 +1,43 @@
+﻿<Page x:Class="BookShopCore.Views.AuthorizationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookShopCore.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="AuthorizationView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="White" MaxWidth="400" Margin="100,100,100,0"  BorderThickness="2" CornerRadius="20" Height="340" VerticalAlignment="Top">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="20" />
+            </Border.Effect>
+            <StackPanel>
+                <DockPanel LastChildFill="True" Grid.Row="1" Margin="5">
+                    <StackPanel Width="300" Margin="30">
+                        <Label Content="ВОЙТИ" FontSize="20" HorizontalContentAlignment="Center" />
+                        <StackPanel Margin="0, 10, 0, 0">
+                            <TextBlock Text="Email" FontSize="20" />
+                            <TextBox Text="{Binding Email}" 
+                     Style="{DynamicResource TextBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Margin="0, 10, 0, 0">
+                            <TextBlock Text="Пароль" FontSize="20" />
+                            <!--<PasswordBox d:PasswordHelper.Attach="True" d:PasswordHelper.Password="{Binding Password}" 
+                         Style="{DynamicResource PasswordBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>-->
+                            <TextBox Text="{Binding Password}"
+                         Style="{DynamicResource TextBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
+                        </StackPanel>
+                        <Button Command="{Binding RegistrationClientCommand}" Style="{DynamicResource ButtonBorderRadius}" 
+                Margin="0, 20, 10, 0" Height="50" Background="Orange" BorderBrush="Transparent" FontSize="20" Content="Зарегистрироваться"/>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

@@ -1,4 +1,5 @@
-﻿using BookShopCore.Model;
+﻿using BookShopCore.Views;
+using BookShopCore.Model;
 using GalaSoft.MvvmLight.Command;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -67,6 +68,16 @@ sealed class RegistrationViewModel : BaseViewModel // sealed означает, �
     _confPassword = string.Empty; 
 
     RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);
+    NavigateToAutorizationCommand = new RelayCommand(NavigateToAutorizationExecute);
+  }
+
+  public void NavigateToAutorizationExecute()
+  {
+    _dbContext.SaveChanges();
+
+    var mainWindow = Application.Current.MainWindow as MainWindow;
+
+    mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
   }
 
   public void RegistrationClientCommandExecute()
@@ -88,6 +99,8 @@ sealed class RegistrationViewModel : BaseViewModel // sealed означает, �
     _dbContext.Users.Add(newUser);
 
     MessageBox.Show("Регистрация прошла успешно!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+
+    NavigateToAutorizationExecute();
   }
 
   #region Методя проверки валидности вводимых данных
