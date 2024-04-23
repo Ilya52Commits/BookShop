@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 
 namespace BookShopCore.Views;
+
 /// <summary>
 /// Логика взаимодействия для RegistrationView.xaml
 /// </summary>

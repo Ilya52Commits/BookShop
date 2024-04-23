@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookShopCore.ViewModels
+﻿namespace BookShopCore.ViewModels;
+sealed class AuthorizationViewModel : BaseViewModel
 {
-  internal class AuthorizationViewModel : BaseViewModel
-  {
-  }
+  private readonly DbContext _dbContext; // для взаимодействия с данными
 }

@@ -5,22 +5,28 @@ using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace BookShopCore.ViewModels;
-sealed class RegistrationViewModel : BaseViewModel // sealed означает, что его нельзя наследовать дальше
-{
-  private readonly DbContext _dbContext; // для взаимодействия с данными
 
+/* Главный клас ViewModel регистрации */ 
+sealed class RegistrationViewModel : BaseViewModel // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
+{
+  #region Поля класса
+  /* Переменная модели для взаимодействия с данными */
+  private readonly DbContext _dbContext;  
+
+  /* Описания параметров для Login */ 
   private string _login; 
   public string Login
   {
-    get => _login;
-    set
+    get => _login;  // Вывод значения
+   
+    set             // Изменение значения
     {
       _login = value;
-      OnPropertyChanged(); 
+      OnPropertyChanged();
     }
   }
 
-
+  /* Описание параметров для Email */ 
   private string _email; 
   public string Email
   {
@@ -32,6 +38,7 @@ sealed class RegistrationViewModel : BaseViewModel // sealed означает, �
     }
   }
 
+  /* Описание параметров для Password */
   private string _password;
   public string Password
   {
@@ -43,6 +50,7 @@ sealed class RegistrationViewModel : BaseViewModel // sealed означает, �
     }
   }
 
+  /* Описание параметров для ConfigPassword */
   private string _confPassword;
   public string ConfigPassword
   {
@@ -54,52 +62,68 @@ sealed class RegistrationViewModel : BaseViewModel // sealed означает, �
     }
   }
 
-  public RelayCommand RegistrationClientCommand { get; }
-  public RelayCommand NavigateToAutorizationCommand { get; }
+  /* Описание команд ViewModel */
+  public RelayCommand RegistrationClientCommand { get; }      // Добавление в базу данных
+  public RelayCommand NavigateToAutorizationCommand { get; }  // Навигация между View
+  #endregion
 
+  /* Конструктор класса */
   public RegistrationViewModel()
   {
-    _dbContext = new DbContext();
+    _dbContext = new DbContext(); // Создание объекта модели бд
 
+    _login = string.Empty;        // Инициализация _login
+    _email = string.Empty;        // Инициализация _email
+    _password = string.Empty;     // Инициализация _password
+    _confPassword = string.Empty; // Инициализация _confPawword
 
-    _login = string.Empty;
-    _email = string.Empty;
-    _password = string.Empty;
-    _confPassword = string.Empty; 
-
-    RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);
-    NavigateToAutorizationCommand = new RelayCommand(NavigateToAutorizationExecute);
+    RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);   // Создание объекта команды и присваивание метода регистрации
+    NavigateToAutorizationCommand = new RelayCommand(NavigateToAutorizationExecute);  // Создание объекта команды и присваивание метода навигации
   }
 
+  #region Методы класса
+  /// <summary>
+  /// Метод для навигации между View
+  /// </summary>
   public void NavigateToAutorizationExecute()
   {
+    // Сохраняет изменения в базе данных
     _dbContext.SaveChanges();
 
-    var mainWindow = Application.Current.MainWindow as MainWindow;
+    // Получение экземпляра главного окна 
+    var mainWindow = Application.Current.MainWindow as MainWindow;  
 
+    // Навигирует к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
   }
 
+  /// <summary>
+  /// Метод для регистрации и передачи параметров в бд
+  /// </summary>
   public void RegistrationClientCommandExecute()
   {
+    // Проверка условий валидации вводимых данных
     if (!IsLoginValidation(_login) || !IsEmailValidation(_email) || !IsPasswordValidation(_password, _confPassword))
     {
       MessageBox.Show("Некоректные данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
       return;
     }
 
+    // Создание объекта модели User
     var newUser = new User
     {
-      Login = _login,
-      Email = _email,
-      Password = _password,
-      Type = "Client",
+      Login = _login,       // Присваивание логина
+      Email = _email,       // Присваивание почты
+      Password = _password, // Присваивание пароля
+      Type = "Client",      // Выставление типа пользователя "по умолчанию"
     };
     
+    // Создание нового пользователя в базе
     _dbContext.Users.Add(newUser);
 
     MessageBox.Show("Регистрация прошла успешно!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
 
+    // Вызов метода для перехода на View авторизации
     NavigateToAutorizationExecute();
   }
 
@@ -187,5 +211,6 @@ sealed class RegistrationViewModel : BaseViewModel // sealed означает, �
 
     return true; 
   }
+  #endregion
   #endregion
 }
