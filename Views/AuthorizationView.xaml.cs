@@ -12,6 +12,6 @@ public partial class AuthorizationView : Page
   {
     InitializeComponent();
 
-    DataContext = new RegistrationViewModel();
+    DataContext = new AuthorizationViewModel();
   }
 }

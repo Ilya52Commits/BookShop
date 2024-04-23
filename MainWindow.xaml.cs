@@ -11,7 +11,7 @@ namespace BookShopCore
     public MainWindow()
     {
       InitializeComponent();
-      MainFrame.NavigationService.Navigate(new RegistrationView());
+      MainFrame.NavigationService.Navigate(new AuthorizationView());
     }
   }
 }

@@ -9,6 +9,16 @@
       Title="ClientProductView">
 
     <Grid>
-        
+        <Border Background="White" MaxWidth="400" Margin="100,100,100,0"  BorderThickness="2" CornerRadius="20" Height="340" VerticalAlignment="Top">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="20" />
+            </Border.Effect>
+            <StackPanel>
+                <DockPanel LastChildFill="True" Grid.Row="1" Margin="5">
+                    <Label Content="ВОЙТИ" FontSize="20" HorizontalContentAlignment="Center" />
+                        
+                </DockPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

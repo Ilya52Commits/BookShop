@@ -8,5 +8,5 @@ internal class DbContext : Microsoft.EntityFrameworkCore.DbContext
     optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=booksDB;Username=postgres;Password=52");
 
   public DbSet<User> Users { get; set; }
-  public DbSet<Product> Products { get; set; }
+  public DbSet<Book> Books { get; set; }
 }

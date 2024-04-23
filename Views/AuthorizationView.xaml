@@ -38,8 +38,8 @@
                             <TextBox Text="{Binding Password}"
                          Style="{DynamicResource TextBoxBorderRadius}" Height="40" Padding="10, 0, 10, 0" VerticalContentAlignment="Center" FontSize="18"/>
                         </StackPanel>
-                        <Button Command="{Binding RegistrationClientCommand}" Style="{DynamicResource ButtonBorderRadius}" 
-                Margin="0, 20, 10, 0" Height="50" Background="Orange" BorderBrush="Transparent" FontSize="20" Content="Зарегистрироваться"/>
+                        <Button Command="{Binding AuthorizationClientCommand}" Style="{DynamicResource ButtonBorderRadius}" 
+                Margin="0, 20, 10, 0" Height="50" Background="Orange" BorderBrush="Transparent" FontSize="20" Content="Войти"/>
                     </StackPanel>
                 </DockPanel>
             </StackPanel>
