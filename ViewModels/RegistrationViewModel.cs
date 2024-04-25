@@ -1,12 +1,12 @@
-﻿using BookShopCore.Views;
-using BookShopCore.Model;
+﻿using BookShopCore.Model;
+using BookShopCore.Views;
 using GalaSoft.MvvmLight.Command;
 using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace BookShopCore.ViewModels;
 
-/* Главный клас ViewModel регистрации */ 
+/* Главный клас ViewModel регистрации */
 sealed class RegistrationViewModel : BaseViewModel // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
 {
   #region Поля класса
@@ -77,8 +77,32 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
     _password = string.Empty;     // Инициализация _password
     _confPassword = string.Empty; // Инициализация _confPawword
 
+
+    AddTheMainAdmin();
+
+
     RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);   // Создание объекта команды и присваивание метода регистрации
     NavigateToAutorizationCommand = new RelayCommand(NavigateToAutorizationExecute);  // Создание объекта команды и присваивание метода навигации
+  }
+
+  private void AddTheMainAdmin()
+  {
+    var admin = _dbContext.Users.FirstOrDefault(a => a.Login == "Admin" && a.Password == "Admin" && a.Email == "Admin" && a.Type == "Admin" && a.IsValidateAdmin == true);
+
+    if (admin == null)
+    {
+      var mainAdmin = new User
+      {
+        Login = "Admin",
+        Email = "Admin",
+        Password = "Admin",
+        Type = "Admin",
+        IsValidateAdmin = true
+      };
+
+      _dbContext.Add(mainAdmin);
+      _dbContext.SaveChanges();
+    }
   }
 
   #region Методы класса
@@ -106,7 +130,6 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
     if (!IsLoginValidation(_login) || !IsEmailValidation(_email) || !IsPasswordValidation(_password, _confPassword))
     {
       MessageBox.Show("Некоректные данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-      return;
     }
 
     // Создание объекта модели User
@@ -181,7 +204,6 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
     return true;
   }
 
-
   /// <summary>
   /// Выполняет проверку валиндости пароля
   /// </summary>
@@ -194,7 +216,7 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
       MessageBox.Show("Недопустимая длина пароля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
       return false;
     }
-
+    
     bool isMatch = Regex.IsMatch(password, "[А-Яа-яЁё]");
 
     if (isMatch)
@@ -205,6 +227,7 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
 
     if (password != confPassword)
     {
+      
       MessageBox.Show("Пароли не совпадают!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
       return false;
     }
