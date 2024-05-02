@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using BookShopCore.ViewModels;
+using System.Windows.Controls;
 
 namespace BookShopCore.Views.ClientViews
 {
@@ -6,10 +7,12 @@ namespace BookShopCore.Views.ClientViews
   /// Логика взаимодействия для ClientProductView.xaml
   /// </summary>
   public partial class ClientProductView : Page
+  {
+    public ClientProductView()
     {
-        public ClientProductView()
-        {
-            InitializeComponent();
-        }
+      InitializeComponent();
+
+      DataContext = new ClientProductViewModel();
     }
+  }
 }

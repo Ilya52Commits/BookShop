@@ -67,6 +67,6 @@ public class Book
   public string Name { get; set; }      // Название книги
   public string Author { get; set; }    // Автор продукта
   public string Genre { get; set; }     // Жанр книги
-  public string Price { get; set; }     // Цена книги
+  public int Price { get; set; }     // Цена книги
 }
 #endregion
