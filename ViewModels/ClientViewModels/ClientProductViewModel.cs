@@ -5,7 +5,8 @@ using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace BookShopCore.ViewModels;
-sealed class ClientProductViewModel : BaseViewModel
+
+internal sealed class ClientProductViewModel : BaseViewModel
 {
   private readonly DbContext _dbContext;
 
@@ -27,7 +28,7 @@ sealed class ClientProductViewModel : BaseViewModel
   {
     _dbContext = new DbContext();
 
-    bool isBookTableNotEmpty = _dbContext.Books.Any();
+    var isBookTableNotEmpty = _dbContext.Books.Any();
 
     if (!isBookTableNotEmpty)
     {
@@ -59,14 +60,14 @@ sealed class ClientProductViewModel : BaseViewModel
     NavigateToBasketCommand = new RelayCommand(NavigateToBasketCommandExecute);
   }
 
-  private void NavigateToBasketCommandExecute()
+  private static void NavigateToBasketCommandExecute()
   {
     var mainWindow = Application.Current.MainWindow as MainWindow;
 
     mainWindow?.MainFrame.NavigationService.Navigate(new BasketView());
   }
 
-  private void BuyCommandExecute()
+  private static void BuyCommandExecute()
   {
     
 

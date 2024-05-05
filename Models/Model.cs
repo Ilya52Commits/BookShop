@@ -25,7 +25,7 @@ public class User : IDataErrorInfo
   {
     get
     {
-      string error = String.Empty;
+      var error = string.Empty;
       switch (columnName)
       {
         case "Login":

@@ -20,7 +20,7 @@
     </Style>
     
     <!-- Стили кнопки перехода навигации -->
-    <Style x:Key="BottunNavigateStyles" TargetType="Button">
+    <Style x:Key="ButtonNavigateStyles" TargetType="Button">
         <Setter Property="Padding" Value="10, 7, 10, 7"/>
         <Setter Property="Background" Value="Orange"/>
         <Setter Property="BorderBrush" Value="Orange"/>

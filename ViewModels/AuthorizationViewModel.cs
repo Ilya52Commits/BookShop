@@ -3,7 +3,8 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows;
 
 namespace BookShopCore.ViewModels;
-sealed class AuthorizationViewModel : BaseViewModel
+
+internal sealed class AuthorizationViewModel : BaseViewModel
 {
   /* Переменная модели для взаимодействия с данными */
   private readonly DbContext _dbContext;
@@ -45,7 +46,7 @@ sealed class AuthorizationViewModel : BaseViewModel
   }
 
   public RelayCommand AuthorizationClientCommand { get; }
-  public RelayCommand NavigateToAutorizationCommand { get; }
+  public RelayCommand NavigateToAuthorizationCommand { get; }
 
   public AuthorizationViewModel()
   {
@@ -56,10 +57,10 @@ sealed class AuthorizationViewModel : BaseViewModel
     _password = string.Empty;
 
     AuthorizationClientCommand = new RelayCommand(AuthorizationClientCommandExecute);
-    NavigateToAutorizationCommand = new RelayCommand(NavigateToAutorizationCommandExecute);
+    NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationCommandExecute);
   }
 
-  private void NavigateToAutorizationCommandExecute()
+  private static void NavigateToAuthorizationCommandExecute()
   {
 
     // Получение экземпляра главного окна 
@@ -80,29 +81,27 @@ sealed class AuthorizationViewModel : BaseViewModel
       if (admin != null)
       {
         MessageBox.Show("Здравсвтуйте, создатель!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-        NavigateToAutorizationCommandExecute();
+        NavigateToAuthorizationCommandExecute();
       }
       else
       {
         MessageBox.Show("Вы не создатель!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-        return;
       }
     }
     // Иначе проводится поиск обычного пользователя
     else
     {
-      // Выполнение запроса к базе данных PostgreSQL для проверки почты и пароля
+      // Выполнение запроса к базе данных PostgresSQL для проверки почты и пароля
       var user = _dbContext.Users.FirstOrDefault(u => u.Email == _email && u.Password == _password);
 
       if (user != null)
       {
         MessageBox.Show("Вы успешно вошли в систему!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-        NavigateToAutorizationCommandExecute();
+        NavigateToAuthorizationCommandExecute();
       }
       else
       {
         MessageBox.Show("Почта или пароль не совпадают!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-        return; 
       }
     }
   }

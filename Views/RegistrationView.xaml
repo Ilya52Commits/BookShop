@@ -19,20 +19,24 @@
     </Page.DataContext>
     
     <Grid>
+        <!-- Параметры для Grid -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- Создание контейнера -->
         <Border Style="{DynamicResource BorderContainerStyles}">
+            <!-- Параметры для Border -->
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="1" BlurRadius="20" />
             </Border.Effect>
             
+            <!-- Создание содержимого контейнера -->
             <StackPanel>
                 <DockPanel Style="{DynamicResource DockerPanelStyles}">
                     <StackPanel Width="300" Margin="30">
                         <StackPanel HorizontalAlignment="Left">
-                            <Button Command="{Binding NavigateToAutorizationCommand}" Style="{DynamicResource BottunNavigateStyles}" Content="Уже есть аккаунт"/>
+                            <Button Command="{Binding NavigateToAuthorizationCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Уже есть аккаунт"/>
                         </StackPanel>
                         
                         <Label Style="{DynamicResource LabelStyles}" Content="РЕГИСТРАЦИЯ" />

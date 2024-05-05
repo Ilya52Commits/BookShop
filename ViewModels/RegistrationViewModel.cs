@@ -7,7 +7,7 @@ using System.Windows;
 namespace BookShopCore.ViewModels;
 
 /* Главный клас ViewModel регистрации */
-sealed class RegistrationViewModel : BaseViewModel // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
+internal sealed partial class RegistrationViewModel : BaseViewModel // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
 {
   #region Поля класса
   /* Переменная модели для взаимодействия с данными */
@@ -64,7 +64,7 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
 
   /* Описание команд ViewModel */
   public RelayCommand RegistrationClientCommand { get; }      // Добавление в базу данных
-  public RelayCommand NavigateToAutorizationCommand { get; }  // Навигация между View
+  public RelayCommand NavigateToAuthorizationCommand { get; }  // Навигация между View
   #endregion
 
   /* Конструктор класса */
@@ -75,41 +75,39 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
     _login = string.Empty;        // Инициализация _login
     _email = string.Empty;        // Инициализация _email
     _password = string.Empty;     // Инициализация _password
-    _confPassword = string.Empty; // Инициализация _confPawword
+    _confPassword = string.Empty; // Инициализация _confPassword
 
 
     AddTheMainAdmin();
 
 
     RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);   // Создание объекта команды и присваивание метода регистрации
-    NavigateToAutorizationCommand = new RelayCommand(NavigateToAutorizationExecute);  // Создание объекта команды и присваивание метода навигации
+    NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationExecute);  // Создание объекта команды и присваивание метода навигации
   }
 
   private void AddTheMainAdmin()
   {
     var admin = _dbContext.Users.FirstOrDefault(a => a.Login == "Admin" && a.Password == "Admin" && a.Email == "Admin" && a.Type == "Admin" && a.IsValidateAdmin == true);
 
-    if (admin == null)
+    if (admin != null) return;
+    var mainAdmin = new User
     {
-      var mainAdmin = new User
-      {
-        Login = "Admin",
-        Email = "Admin",
-        Password = "Admin",
-        Type = "Admin",
-        IsValidateAdmin = true
-      };
+      Login = "Admin",
+      Email = "Admin",
+      Password = "Admin",
+      Type = "Admin",
+      IsValidateAdmin = true
+    };
 
-      _dbContext.Add(mainAdmin);
-      _dbContext.SaveChanges();
-    }
+    _dbContext.Add(mainAdmin);
+    _dbContext.SaveChanges();
   }
 
   #region Методы класса
   /// <summary>
   /// Метод для навигации между View
   /// </summary>
-  public void NavigateToAutorizationExecute()
+  private void NavigateToAuthorizationExecute()
   {
     // Сохраняет изменения в базе данных
     _dbContext.SaveChanges();
@@ -124,12 +122,13 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
   /// <summary>
   /// Метод для регистрации и передачи параметров в бд
   /// </summary>
-  public void RegistrationClientCommandExecute()
+  private void RegistrationClientCommandExecute()
   {
     // Проверка условий валидации вводимых данных
     if (!IsLoginValidation(_login) || !IsEmailValidation(_email) || !IsPasswordValidation(_password, _confPassword))
     {
       MessageBox.Show("Некоректные данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+      return; 
     }
 
     // Создание объекта модели User
@@ -147,7 +146,7 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
     MessageBox.Show("Регистрация прошла успешно!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
 
     // Вызов метода для перехода на View авторизации
-    NavigateToAutorizationExecute();
+    NavigateToAuthorizationExecute();
   }
 
   #region Методя проверки валидности вводимых данных
@@ -164,20 +163,17 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
       return false;
     }
 
-    bool containsNumbers = Regex.IsMatch(login, "[\\d\\W]");
+    var containsNumbers = MyRegex().IsMatch(login);
     if (containsNumbers)
     {
       MessageBox.Show("Недопустимые символы логина!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
       return false;
     }
 
-    if (char.IsLower(login[0]))
-    {
-      MessageBox.Show("Логин должен быть с большёй буквы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-      return false;
-    }
+    if (!char.IsLower(login[0])) return true;
+    MessageBox.Show("Логин должен быть с большёй буквы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+    return false;
 
-    return true;
   }
 
   /// <summary>
@@ -187,27 +183,26 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
   /// <returns></returns>
   private static bool IsEmailValidation(string email)
   {
-    if (!email.Contains("@"))
+    if (!email.Contains('@'))
     {
       MessageBox.Show("Вы указали некоректную почту!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
       return false;
     }
 
-    string[] emailSplitArray = email.Split('@');
-    if (emailSplitArray.Length < 2 || emailSplitArray[1].Split('.').Length < 2 
-      || emailSplitArray[1].Split('.')[0].Length < 2 || emailSplitArray[1].Split('.')[1].Length < 2)
-    {
-      MessageBox.Show("Вы указали некоректную почту!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-      return false;
-    }
+    var emailSplitArray = email.Split('@');
+    if (emailSplitArray.Length >= 2 && emailSplitArray[1].Split('.').Length >= 2
+                                    && emailSplitArray[1].Split('.')[0].Length >= 2 &&
+                                    emailSplitArray[1].Split('.')[1].Length >= 2) return true;
+    MessageBox.Show("Вы указали некоректную почту!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+    return false;
 
-    return true;
   }
 
   /// <summary>
   /// Выполняет проверку валиндости пароля
   /// </summary>
   /// <param name="password"></param>
+  /// <param name="confPassword"></param>
   /// <returns></returns>
   private static bool IsPasswordValidation(string password, string confPassword)
   {
@@ -217,7 +212,7 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
       return false;
     }
     
-    bool isMatch = Regex.IsMatch(password, "[А-Яа-яЁё]");
+    var isMatch = MyRegex1().IsMatch(password);
 
     if (isMatch)
     {
@@ -225,15 +220,16 @@ sealed class RegistrationViewModel : BaseViewModel // Наследуем от Vi
       return false;
     }
 
-    if (password != confPassword)
-    {
-      
-      MessageBox.Show("Пароли не совпадают!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-      return false;
-    }
+    if (password == confPassword) return true;
+    MessageBox.Show("Пароли не совпадают!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+    return false;
 
-    return true; 
   }
-  #endregion
-  #endregion
+
+    [GeneratedRegex(@"[\d\W]")]
+    private static partial Regex MyRegex();
+    [GeneratedRegex("[А-Яа-яЁё]")]
+    private static partial Regex MyRegex1();
+    #endregion
+    #endregion
 }
