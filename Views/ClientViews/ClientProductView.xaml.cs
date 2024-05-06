@@ -1,4 +1,4 @@
-﻿using BookShopCore.ViewModels;
+﻿using BookShopCore.ViewModels.ClientViewModels;
 using System.Windows.Controls;
 
 namespace BookShopCore.Views.ClientViews

@@ -1,5 +1,4 @@
-﻿using BookShopCore.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace BookShopCore.Views;
@@ -12,8 +11,6 @@ public partial class RegistrationView : Page
   public RegistrationView()
   {
     InitializeComponent();
-
-    DataContext = new RegistrationViewModel();
   }
 
   /**************************************************************************************/ 

@@ -19,44 +19,56 @@
     </Page.DataContext>
 
     <Grid>
+        <!-- Параметры для Grid -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- Создание контейнера -->
         <Border Style="{DynamicResource BorderContainerStyles}">
+            <!-- Параметры для Border -->
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="1" BlurRadius="20" />
             </Border.Effect>
-            
-            <StackPanel>
-                <DockPanel Style="{DynamicResource DockerPanelStyles}">
-                    <StackPanel Width="300" Margin="30">
-                        <Label Style="{DynamicResource LabelStyles}" Content="ВОЙТИ" />
-                        
-                        <StackPanel Margin="0, 10, 0, 0">
-                            <TextBlock Text="Email" FontSize="20" />
-                            <Border Style="{DynamicResource TextBoxBorderStyles}">
-                                <TextBox Text="{Binding Login}" Style="{DynamicResource TextBoxStyles}" />
-                            </Border>
-                        </StackPanel>
-                        
-                        <StackPanel Margin="0, 10, 0, 0">
-                            <TextBlock Text="Пароль" FontSize="20" />
-                            <Border Style="{DynamicResource TextBoxBorderStyles}">
-                                <TextBox Text="{Binding Password}" Style="{DynamicResource TextBoxStyles}" />
-                            </Border>
-                        </StackPanel>
-                        
-                        <Border Style="{DynamicResource ButtonBorderStyles}">
-                            <Button 
+
+            <!-- Создание блока входа -->
+            <DockPanel Style="{DynamicResource DockerPanelStyles}">
+                <!-- Создание содержимого блока -->
+                <StackPanel Width="300" Margin="30">
+                    <!-- Создание кнопки перехода на страницу авторизацию -->
+                    <StackPanel HorizontalAlignment="Left">
+                        <Button Command="{Binding NavigateToRegistrationCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Регистрация"/>
+                    </StackPanel>
+                    
+                    <!-- Создание заголовка -->
+                    <Label Style="{DynamicResource LabelStyles}" Content="ВОЙТИ" />
+
+                    <!-- Создание поля ввода логина -->
+                    <StackPanel Margin="0, 10, 0, 0">
+                        <TextBlock Text="Email" FontSize="20" />
+                        <Border Style="{DynamicResource TextBoxBorderStyles}">
+                            <TextBox Text="{Binding Login}" Style="{DynamicResource TextBoxStyles}" />
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Создание поля ввода пароля -->
+                    <StackPanel Margin="0, 10, 0, 0">
+                        <TextBlock Text="Пароль" FontSize="20" />
+                        <Border Style="{DynamicResource TextBoxBorderStyles}">
+                            <TextBox Text="{Binding Password}" Style="{DynamicResource TextBoxStyles}" />
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Создание кнопки обработчика вводимых данных -->
+                    <Border Style="{DynamicResource ButtonBorderStyles}">
+                        <Button 
                                 Command="{Binding AuthorizationClientCommand}" 
                                 Style="{DynamicResource ButtonStyles}" 
                                 Content="Войти"
                             />
-                        </Border>
-                    </StackPanel>
-                </DockPanel>
-            </StackPanel>
+                    </Border>
+                </StackPanel>
+            </DockPanel>
         </Border>
     </Grid>
 </Page>

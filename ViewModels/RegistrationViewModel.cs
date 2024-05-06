@@ -11,27 +11,27 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
 {
   #region Поля класса
   /* Переменная модели для взаимодействия с данными */
-  private readonly DbContext _dbContext;  
+  private readonly DbContext _dbContext;
 
-  /* Описания параметров для Login */ 
-  private string _login; 
+  /* Описания параметров для Login */
+  private string _login;
   public string Login
   {
-    get => _login;  // Вывод значения
-   
-    set             // Изменение значения
+    get => _login;          // Вывод значения
+
+    set                     // Изменение значения
     {
-      _login = value;
-      OnPropertyChanged();
+      _login = value;       // Присваивание нового значения
+      OnPropertyChanged();  // Вызов события изменения
     }
   }
 
-  /* Описание параметров для Email */ 
-  private string _email; 
+  /* Описание параметров для Email */
+  private string _email;
   public string Email
   {
     get => _email;
-    set 
+    set
     {
       _email = value;
       OnPropertyChanged();
@@ -62,7 +62,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
     }
   }
 
-  /* Описание команд ViewModel */
+  /* Описание команд страницы */
   public RelayCommand RegistrationClientCommand { get; }      // Добавление в базу данных
   public RelayCommand NavigateToAuthorizationCommand { get; }  // Навигация между View
   #endregion
@@ -77,28 +77,34 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
     _password = string.Empty;     // Инициализация _password
     _confPassword = string.Empty; // Инициализация _confPassword
 
-
+    // Вызов метода для создания админа
     AddTheMainAdmin();
 
-
-    RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);   // Создание объекта команды и присваивание метода регистрации
+    RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);     // Создание объекта команды и присваивание метода регистрации
     NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationExecute);  // Создание объекта команды и присваивание метода навигации
   }
 
+  /// <summary>
+  /// Метод для создания админа
+  /// </summary>
   private void AddTheMainAdmin()
   {
+    // Поиск главного админа в базе данных
     var admin = _dbContext.Users.FirstOrDefault(a => a.Login == "Admin" && a.Password == "Admin" && a.Email == "Admin" && a.Type == "Admin" && a.IsValidateAdmin == true);
-
+    // Если он присутствует, то происходит выход из метода
     if (admin != null) return;
+
+    // Создание объекта модели User для главного админа
     var mainAdmin = new User
     {
-      Login = "Admin",
-      Email = "Admin",
-      Password = "Admin",
-      Type = "Admin",
-      IsValidateAdmin = true
+      Login = "Admin",        // Присвоение логина
+      Email = "Admin",        // Присвоение почты
+      Password = "Admin",     // Присвоение пароля
+      Type = "Admin",         // Присвоение типа
+      IsValidateAdmin = true  // Присвоение валидации
     };
 
+    // Добавление и сохранение базы данных
     _dbContext.Add(mainAdmin);
     _dbContext.SaveChanges();
   }
@@ -113,7 +119,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
     _dbContext.SaveChanges();
 
     // Получение экземпляра главного окна 
-    var mainWindow = Application.Current.MainWindow as MainWindow;  
+    var mainWindow = Application.Current.MainWindow as MainWindow;
 
     // Навигирует к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
@@ -127,8 +133,9 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
     // Проверка условий валидации вводимых данных
     if (!IsLoginValidation(_login) || !IsEmailValidation(_email) || !IsPasswordValidation(_password, _confPassword))
     {
+      // Вывод сообщения об обишке
       MessageBox.Show("Некоректные данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-      return; 
+      return;
     }
 
     // Создание объекта модели User
@@ -139,10 +146,11 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
       Password = _password, // Присваивание пароля
       Type = "Client",      // Выставление типа пользователя "по умолчанию"
     };
-    
+
     // Создание нового пользователя в базе
     _dbContext.Users.Add(newUser);
 
+    // Вывод сообщения об успешной регистрации
     MessageBox.Show("Регистрация прошла успешно!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
 
     // Вызов метода для перехода на View авторизации
@@ -211,7 +219,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
       MessageBox.Show("Недопустимая длина пароля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
       return false;
     }
-    
+
     var isMatch = MyRegex1().IsMatch(password);
 
     if (isMatch)
@@ -226,10 +234,10 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
 
   }
 
-    [GeneratedRegex(@"[\d\W]")]
-    private static partial Regex MyRegex();
-    [GeneratedRegex("[А-Яа-яЁё]")]
-    private static partial Regex MyRegex1();
-    #endregion
-    #endregion
+  [GeneratedRegex(@"[\d\W]")]
+  private static partial Regex MyRegex();
+  [GeneratedRegex("[А-Яа-яЁё]")]
+  private static partial Regex MyRegex1();
+  #endregion
+  #endregion
 }

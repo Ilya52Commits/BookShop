@@ -2,7 +2,7 @@
 
 namespace BookShopCore.Model;
 
-public interface IDataErrorInfo /**********************************************************************************/
+public interface IDataErrorInfo /* 1*********************************************************************************/
 {
   string Error { get; }
   string this[string columnName] { get; }

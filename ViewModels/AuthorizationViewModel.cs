@@ -1,4 +1,6 @@
-﻿using BookShopCore.Views.ClientViews;
+﻿using BookShopCore.Views;
+using BookShopCore.Views.AdminViews;
+using BookShopCore.Views.ClientViews;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
 
@@ -9,15 +11,17 @@ internal sealed class AuthorizationViewModel : BaseViewModel
   /* Переменная модели для взаимодействия с данными */
   private readonly DbContext _dbContext;
 
+  private static bool _isAdmin; 
+
   /* Описание параметров для Login */
   private string _login;
-  public string Login
+  public string Login       // Вывод значения
   {
-    get => _login;
+    get => _login;          // Изменение значения
     set
     {
-      _login = value;
-      OnPropertyChanged();
+      _login = value;       // Присваивание нового значения
+      OnPropertyChanged();  // Вызов события изминения
     }
   }
 
@@ -45,31 +49,66 @@ internal sealed class AuthorizationViewModel : BaseViewModel
     }
   }
 
-  public RelayCommand AuthorizationClientCommand { get; }
-  public RelayCommand NavigateToAuthorizationCommand { get; }
+  /* Описание команд страницы */
+  public RelayCommand AuthorizationClientCommand { get; }     // Проверка вводимых данных
+  public RelayCommand NavigateToProductPageCommand { get; }   // Переход на страницу продукта
+  public RelayCommand NavigateToRegistrationCommand { get; }  // Переход на страницу регистрации
 
+  /* Конструктор по умолчанию */
   public AuthorizationViewModel()
   {
     _dbContext = new DbContext(); // Создание объекта модели бд
 
-    _login = string.Empty;
-    _email = string.Empty;
-    _password = string.Empty;
+    _isAdmin = false; 
 
-    AuthorizationClientCommand = new RelayCommand(AuthorizationClientCommandExecute);
-    NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationCommandExecute);
+    _login = string.Empty;    // Инициализация переменной логина
+    _email = string.Empty;    // Инициализация переменной почты
+    _password = string.Empty; // Инициализация переменной пароля
+
+    AuthorizationClientCommand = new RelayCommand(AuthorizationClientCommandExecute);       // Инициализация команды обработки вводимых данных
+    NavigateToProductPageCommand = new RelayCommand(NavigateToProductPageCommandExecute);   // Инициализация команды перехода на страницу продуктов
+    NavigateToRegistrationCommand = new RelayCommand(NavigateToRegistrationCommandExecute); // Инициализация команды перехода на страницу регистрации
   }
 
-  private static void NavigateToAuthorizationCommandExecute()
+  #region Методы
+  /// <summary>
+  /// Метод перехода на страницу регистрации
+  /// </summary>
+  private static void NavigateToRegistrationCommandExecute()
   {
-
-    // Получение экземпляра главного окна 
+    // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainWindow;
 
-    // Навигирует к View авторизации
-    mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView());
+    // Навигирует к View регистрации
+    mainWindow?.MainFrame.NavigationService.Navigate(new RegistrationView());
   }
 
+  /// <summary>
+  /// Метод перехода на страницу продуктов
+  /// </summary>
+  private static void NavigateToProductPageCommandExecute()
+  {
+    if (_isAdmin)
+    {
+      // Получение экземпляра главного окна 
+      var mainWindow = Application.Current.MainWindow as MainWindow;
+
+      // Навигирует к View авторизации
+      mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView());
+    }
+    else
+    {
+      // Получение экземпляра главного окна 
+      var mainWindow = Application.Current.MainWindow as MainWindow;
+
+      // Навигирует к View авторизации
+      mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView());
+    }
+  }
+
+  /// <summary>
+  /// Метод обработки вводимых данных
+  /// </summary>
   private void AuthorizationClientCommandExecute()
   {
     // Если вводятся данные главного админа 
@@ -78,31 +117,38 @@ internal sealed class AuthorizationViewModel : BaseViewModel
       // Выполнение запроса к бд для проверки на главного админа
       var admin = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password && u.Type == "Admin" && u.IsValidateAdmin == true);
 
+      // Если пользователь является админом
       if (admin != null)
       {
+        // Присваивание флага проверки на админа
+        _isAdmin = true; 
+        // Выводится сообщение приветствие админа
         MessageBox.Show("Здравсвтуйте, создатель!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-        NavigateToAuthorizationCommandExecute();
+        // Переход на страницу продуктов для админа
+        NavigateToProductPageCommandExecute();
       }
+      // Иначе выводится сообщение, что пользователь не админ
       else
-      {
         MessageBox.Show("Вы не создатель!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-      }
     }
     // Иначе проводится поиск обычного пользователя
     else
     {
       // Выполнение запроса к базе данных PostgresSQL для проверки почты и пароля
-      var user = _dbContext.Users.FirstOrDefault(u => u.Email == _email && u.Password == _password);
+      var user = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password);
 
+      // Если польователь нашёлся
       if (user != null)
       {
+        // Выводится сообщение об успешном входе в систему
         MessageBox.Show("Вы успешно вошли в систему!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-        NavigateToAuthorizationCommandExecute();
+        // Переход на страницу продуктов для клиента
+        NavigateToProductPageCommandExecute();
       }
+      // Выводится сообщение об ошибке
       else
-      {
         MessageBox.Show("Почта или пароль не совпадают!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-      }
     }
   }
+  #endregion
 }

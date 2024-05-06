@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace BookShopCore.ViewModels;
+namespace BookShopCore.ViewModels.ClientViewModels;
 
 internal sealed class ClientProductViewModel : BaseViewModel
 {

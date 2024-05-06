@@ -1,5 +1,4 @@
-﻿using BookShopCore.ViewModels;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace BookShopCore.Views;
 
@@ -11,7 +10,5 @@ public partial class AuthorizationView : Page
   public AuthorizationView()
   {
     InitializeComponent();
-
-    DataContext = new AuthorizationViewModel();
   }
 }
