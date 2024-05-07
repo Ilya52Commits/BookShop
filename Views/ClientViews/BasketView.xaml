@@ -3,12 +3,47 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BookShopCore.Views.ClientViews"
+      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BasketView">
 
+    <!-- Подключение стилей -->
+    <Page.Resources>
+        <ResourceDictionary Source="/./StyleDictionary.xaml"/>
+    </Page.Resources>
+
+    <!-- 3************************ -->
+    <!--<Page.DataContext>
+        <viewModels:BasketViewModel/> 
+    </Page.DataContext>-->
+
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="70" />
+        </Grid.ColumnDefinitions>
+        <!-- Как настроить colums -->
+
+        <DataGrid  
+    AutoGenerateColumns="False" 
+    Grid.Column="1" Grid.Row="0" 
+    CanUserAddRows="False"
+    ItemsSource="{Binding SelectBook}"  
+    >
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Название" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Автор" Binding="{Binding Author}" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Жанр" Binding="{Binding Genre}" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Цена" Binding="{Binding Price}" Width="*"/>
+                <DataGridCheckBoxColumn IsReadOnly="False" Header="Добавить в корзину" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- Создание кнопки перехода на страницу авторизацию -->
+        <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+            <Button Command="{Binding NavigateToBasketCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Купить"/>
+        </StackPanel>
     </Grid>
 </Page>

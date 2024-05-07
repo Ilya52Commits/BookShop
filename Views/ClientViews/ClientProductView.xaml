@@ -3,9 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels"
+      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:ClientProductViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1000"
+      d:DesignHeight="450" d:DesignWidth="1100"
       Title="ClientProductView">
 
     <!-- Подключение стилей -->
@@ -20,7 +20,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="0" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
@@ -28,14 +28,23 @@
 
         <DataGrid  
             AutoGenerateColumns="False" 
-            Grid.Column="1" Grid.Row="0"  
-            ItemsSource="{Binding Books}" >
+            Grid.Column="1" Grid.Row="0" 
+            CanUserAddRows="False"
+            ItemsSource="{Binding Books}"  
+            >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Автор" Binding="{Binding Author}" Width="*"/>
-                <DataGridTextColumn Header="Жанр" Binding="{Binding Genre}" Width="*"/>
-                <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*"/>
-                <DataGridCheckBoxColumn Header="Добавить в корзину" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Название" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Автор" Binding="{Binding Author}" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Жанр" Binding="{Binding Genre}" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Цена" Binding="{Binding Price}" Width="*"/>
+                <DataGridTemplateColumn Header="Добавить" Width="auto" MinWidth="20">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.AddToBucketCommand, ElementName=ClientProdPage}"
+                                    CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <!-- Создание кнопки перехода на страницу авторизацию -->

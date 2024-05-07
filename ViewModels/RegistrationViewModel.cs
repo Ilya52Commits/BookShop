@@ -77,11 +77,11 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
     _password = string.Empty;     // Инициализация _password
     _confPassword = string.Empty; // Инициализация _confPassword
 
-    // Вызов метода для создания админа
-    AddTheMainAdmin();
-
     RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);     // Создание объекта команды и присваивание метода регистрации
     NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationExecute);  // Создание объекта команды и присваивание метода навигации
+
+    // Вызов метода для создания админа
+    AddTheMainAdmin();
   }
 
   /// <summary>

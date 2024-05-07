@@ -11,8 +11,6 @@ internal sealed class AuthorizationViewModel : BaseViewModel
   /* Переменная модели для взаимодействия с данными */
   private readonly DbContext _dbContext;
 
-  private static bool _isAdmin; 
-
   /* Описание параметров для Login */
   private string _login;
   public string Login       // Вывод значения
@@ -26,7 +24,7 @@ internal sealed class AuthorizationViewModel : BaseViewModel
   }
 
   /* Описание параметров для Email */
-  private string _email; 
+  private string _email;
   public string Email
   {
     get => _email;
@@ -59,14 +57,11 @@ internal sealed class AuthorizationViewModel : BaseViewModel
   {
     _dbContext = new DbContext(); // Создание объекта модели бд
 
-    _isAdmin = false; 
-
-    _login = string.Empty;    // Инициализация переменной логина
-    _email = string.Empty;    // Инициализация переменной почты
-    _password = string.Empty; // Инициализация переменной пароля
+    _login = string.Empty;        // Инициализация переменной логина
+    _email = string.Empty;        // Инициализация переменной почты
+    _password = string.Empty;     // Инициализация переменной пароля
 
     AuthorizationClientCommand = new RelayCommand(AuthorizationClientCommandExecute);       // Инициализация команды обработки вводимых данных
-    NavigateToProductPageCommand = new RelayCommand(NavigateToProductPageCommandExecute);   // Инициализация команды перехода на страницу продуктов
     NavigateToRegistrationCommand = new RelayCommand(NavigateToRegistrationCommandExecute); // Инициализация команды перехода на страницу регистрации
   }
 
@@ -84,29 +79,6 @@ internal sealed class AuthorizationViewModel : BaseViewModel
   }
 
   /// <summary>
-  /// Метод перехода на страницу продуктов
-  /// </summary>
-  private static void NavigateToProductPageCommandExecute()
-  {
-    if (_isAdmin)
-    {
-      // Получение экземпляра главного окна 
-      var mainWindow = Application.Current.MainWindow as MainWindow;
-
-      // Навигирует к View авторизации
-      mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView());
-    }
-    else
-    {
-      // Получение экземпляра главного окна 
-      var mainWindow = Application.Current.MainWindow as MainWindow;
-
-      // Навигирует к View авторизации
-      mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView());
-    }
-  }
-
-  /// <summary>
   /// Метод обработки вводимых данных
   /// </summary>
   private void AuthorizationClientCommandExecute()
@@ -115,17 +87,22 @@ internal sealed class AuthorizationViewModel : BaseViewModel
     if (_login == "Admin" && _password == "Admin")
     {
       // Выполнение запроса к бд для проверки на главного админа
-      var admin = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password && u.Type == "Admin" && u.IsValidateAdmin == true);
+      var admin = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password
+                                                  && u.Type == "Admin" && u.IsValidateAdmin == true);
 
       // Если пользователь является админом
       if (admin != null)
       {
-        // Присваивание флага проверки на админа
-        _isAdmin = true; 
         // Выводится сообщение приветствие админа
         MessageBox.Show("Здравсвтуйте, создатель!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-        // Переход на страницу продуктов для админа
-        NavigateToProductPageCommandExecute();
+
+        /* Переход на страницу продуктов для админа */
+        // Получение экземпляра главного окна 
+        var mainWindow = Application.Current.MainWindow as MainWindow;
+
+        // Навигирует к View авторизации
+        mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView(_dbContext.Users.First(user => user.Login == "Admin" && user.Password == "Admin" 
+                                                                                                     && user.Type == "Admin" && user.IsValidateAdmin == true)));
       }
       // Иначе выводится сообщение, что пользователь не админ
       else
@@ -142,8 +119,13 @@ internal sealed class AuthorizationViewModel : BaseViewModel
       {
         // Выводится сообщение об успешном входе в систему
         MessageBox.Show("Вы успешно вошли в систему!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-        // Переход на страницу продуктов для клиента
-        NavigateToProductPageCommandExecute();
+
+        /* Переход на страницу продуктов для клиента */
+        // Получение экземпляра главного окна 
+        var mainWindow = Application.Current.MainWindow as MainWindow;
+
+        // Навигирует к View авторизации
+        mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView(_dbContext.Users.First(user => user.Login == _login && user.Password == _password)));
       }
       // Выводится сообщение об ошибке
       else
