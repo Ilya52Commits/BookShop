@@ -8,17 +8,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6399ed25-6c42-46f3-808c-0373ac9ceda4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Models/Model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Model.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StyleDictionary.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/StyleDictionary.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/RegistrationView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="autoShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,8 +39,14 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/0e8ece3526ef3575fb85de308b8a4cd5840f928e/src/EFCore.Relational/Query/Internal/SingleQueryingEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://F:/Ilya/Programming/BookShopCore/Models/Model.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://F:/Ilya/Programming/BookShopCore/ViewModels/ClientViewModels/ClientProductViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://F:/Ilya/Programming/BookShopCore/ViewModels/RegistrationViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://F:/Ilya/Programming/BookShopCore/ViewModels/RegistrationViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://F:/Ilya/Programming/BookShopCore/Views/AuthorizationView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://F:/Ilya/Programming/BookShopCore/Views/AuthorizationView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://F:/Ilya/Programming/BookShopCore/Views/RegistrationView.xaml" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -57,6 +66,7 @@
     ".NET Project.BookShopCore.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.4370861",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -67,6 +77,9 @@
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ],
     "rider.external.source.directories": [
       "C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
       "C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
@@ -106,8 +119,27 @@
       <workItem from="1713803702937" duration="555000" />
       <workItem from="1713805788745" duration="719000" />
       <workItem from="1713815729796" duration="620000" />
-      <workItem from="1714902813462" duration="7903000" />
+      <workItem from="1714902813462" duration="8197000" />
+      <workItem from="1715018776554" duration="1290000" />
+      <workItem from="1715109580163" duration="6279000" />
     </task>
+    <task id="LOCAL-00001" summary="Провёл рефакторинг кода">
+      <option name="closed" value="true" />
+      <created>1714935964503</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714935964504</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Добавление файла Unvommitted_changes">
+      <option name="closed" value="true" />
+      <created>1714936029488</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714936029488</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,5 +149,40 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Провёл рефакторинг кода" />
+    <MESSAGE value="Добавление файла Unvommitted_changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавление файла Unvommitted_changes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Models/Model.cs</url>
+          <line>16</line>
+          <properties documentPath="F:\Ilya\Programming\BookShopCore\Models\Model.cs" containingFunctionPresentation="Property 'Login'">
+            <startOffsets>
+              <option value="470" />
+            </startOffsets>
+            <endOffsets>
+              <option value="474" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Models/Model.cs</url>
+          <line>16</line>
+          <properties documentPath="F:\Ilya\Programming\BookShopCore\Models\Model.cs" containingFunctionPresentation="Property 'Login'">
+            <startOffsets>
+              <option value="475" />
+            </startOffsets>
+            <endOffsets>
+              <option value="479" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

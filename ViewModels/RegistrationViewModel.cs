@@ -67,6 +67,46 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
   public RelayCommand NavigateToAuthorizationCommand { get; }  // Навигация между View
   #endregion
 
+  /*********************************************************************************************************/
+  public string this[string columnName] 
+  {
+    get
+    {
+      var error = string.Empty;
+      switch (columnName)
+      {
+        case "Login":
+          if (Login.Length < 2)
+          {
+            error = "Недопустимый логин!";
+          }
+
+          bool containsNumbers = Regex.IsMatch(Login, "[\\d\\W]");
+          if (containsNumbers)
+          {
+            error = "Недопустимые символы логина!";
+          }
+
+          if (char.IsLower(Login[0]))
+          {
+            error = "Логин должен быть с большёй буквы!";
+          }
+          break;
+      }
+
+      return error; 
+    }  
+  }
+  public string Error
+  {
+    get
+    {
+      throw new NotImplementedException();
+    }
+  }
+
+/**********************************************************************************************************/
+  
   /* Конструктор класса */
   public RegistrationViewModel()
   {

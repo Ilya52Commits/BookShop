@@ -32,7 +32,7 @@
             </Border.Effect>
 
             <!-- Создание блока регистрации -->
-            <DockPanel Style="{DynamicResource DockerPanelStyles}">
+            <Grid >
                 <!-- Создание содержимого блока -->
                 <StackPanel Width="300" Margin="30">
                     <!-- Создание кнопки перехода на страницу авторизацию -->
@@ -92,7 +92,7 @@
                             />
                     </Border>
                 </StackPanel>
-            </DockPanel>
+            </Grid>
         </Border>
     </Grid>
 </Page>

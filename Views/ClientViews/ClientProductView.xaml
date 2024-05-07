@@ -13,11 +13,6 @@
         <ResourceDictionary Source="/./StyleDictionary.xaml"/>
     </Page.Resources>
 
-    <!-- 3************************ -->
-    <!--<Page.DataContext>-->
-        <!--<viewModels:ClientProductViewModel/> -->
-    <!--</Page.DataContext>-->
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0" />

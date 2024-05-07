@@ -6,18 +6,12 @@
       xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="BasketView">
+      Title="BasketView" d:DataContext="{d:DesignInstance }">
 
     <!-- Подключение стилей -->
     <Page.Resources>
         <ResourceDictionary Source="/./StyleDictionary.xaml"/>
     </Page.Resources>
-
-    <!-- 3************************ -->
-    <!--<Page.DataContext>
-        <viewModels:BasketViewModel/> 
-    </Page.DataContext>-->
-
 
     <Grid>
         <Grid.ColumnDefinitions>
