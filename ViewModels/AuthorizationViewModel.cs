@@ -88,7 +88,7 @@ internal sealed class AuthorizationViewModel : BaseViewModel
     {
       // Выполнение запроса к бд для проверки на главного админа
       var admin = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password
-                                                  && u.Type == "Admin" && u.IsValidateAdmin == true);
+                                                  && u.Role == "Admin" && u.IsValidateAdmin == true);
 
       // Если пользователь является админом
       if (admin != null)
@@ -102,7 +102,7 @@ internal sealed class AuthorizationViewModel : BaseViewModel
 
         // Навигирует к View авторизации
         mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView(_dbContext.Users.First(user => user.Login == "Admin" && user.Password == "Admin" 
-                                                                                                     && user.Type == "Admin" && user.IsValidateAdmin == true)));
+                                                                                                     && user.Role == "Admin" && user.IsValidateAdmin == true)));
       }
       // Иначе выводится сообщение, что пользователь не админ
       else

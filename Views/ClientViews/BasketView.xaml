@@ -3,10 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels"
+      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:BasketViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="BasketView" d:DataContext="{d:DesignInstance }">
+      Title="BasketView">
 
     <!-- Подключение стилей -->
     <Page.Resources>
@@ -22,11 +22,11 @@
         <!-- Как настроить colums -->
 
         <DataGrid  
-    AutoGenerateColumns="False" 
-    Grid.Column="1" Grid.Row="0" 
-    CanUserAddRows="False"
-    ItemsSource="{Binding SelectBook}"  
-    >
+            AutoGenerateColumns="False" 
+            Grid.Column="1" Grid.Row="0" 
+            CanUserAddRows="False"
+            ItemsSource="{Binding SelectBook}"  
+            >
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="Название" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn IsReadOnly="True" Header="Автор" Binding="{Binding Author}" Width="*"/>

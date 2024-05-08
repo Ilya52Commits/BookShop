@@ -119,34 +119,6 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
 
     RegistrationClientCommand = new RelayCommand(RegistrationClientCommandExecute);     // Создание объекта команды и присваивание метода регистрации
     NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationExecute);  // Создание объекта команды и присваивание метода навигации
-
-    // Вызов метода для создания админа
-    AddTheMainAdmin();
-  }
-
-  /// <summary>
-  /// Метод для создания админа
-  /// </summary>
-  private void AddTheMainAdmin()
-  {
-    // Поиск главного админа в базе данных
-    var admin = _dbContext.Users.FirstOrDefault(a => a.Login == "Admin" && a.Password == "Admin" && a.Email == "Admin" && a.Type == "Admin" && a.IsValidateAdmin == true);
-    // Если он присутствует, то происходит выход из метода
-    if (admin != null) return;
-
-    // Создание объекта модели User для главного админа
-    var mainAdmin = new User
-    {
-      Login = "Admin",        // Присвоение логина
-      Email = "Admin",        // Присвоение почты
-      Password = "Admin",     // Присвоение пароля
-      Type = "Admin",         // Присвоение типа
-      IsValidateAdmin = true  // Присвоение валидации
-    };
-
-    // Добавление и сохранение базы данных
-    _dbContext.Add(mainAdmin);
-    _dbContext.SaveChanges();
   }
 
   #region Методы класса
@@ -184,7 +156,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
       Login = _login,       // Присваивание логина
       Email = _email,       // Присваивание почты
       Password = _password, // Присваивание пароля
-      Type = "Client",      // Выставление типа пользователя "по умолчанию"
+      Role = "Client",      // Выставление типа пользователя "по умолчанию"
     };
 
     // Создание нового пользователя в базе

@@ -47,9 +47,9 @@
                     <StackPanel Margin="0, 10, 0, 0">
                         <TextBlock Text="Логин" FontSize="20" />
                         <Border Style="{DynamicResource TextBoxBorderStyles}">
-                            <TextBox Style="{DynamicResource TextBoxStyles}" Validation.Error="TextBox_Error">
+                            <TextBox Style="{DynamicResource TextBoxStyles}">
                                 <TextBox.Text>
-                                    <Binding Path="Login" NotifyOnValidationError="True"> <!-- 2**************************************************** -->
+                                    <Binding Path="Login" NotifyOnValidationError="True">
                                         <Binding.ValidationRules>
                                             <DataErrorValidationRule />
                                         </Binding.ValidationRules>

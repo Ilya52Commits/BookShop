@@ -1,12 +1,15 @@
-﻿using System;
+﻿using BookShopCore.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookShopCore.ViewModels.AdminViewModels
+namespace BookShopCore.ViewModels.AdminViewModels;
+
+class AdminProductViewModel : BaseViewModel
 {
-    class AdminProductViewModel
-    {
-    }
+  AdminProductViewModel(User user)
+  {
+  }
 }
