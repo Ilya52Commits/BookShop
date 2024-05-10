@@ -97,15 +97,9 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
       return error; 
     }  
   }
-  public string Error
-  {
-    get
-    {
-      throw new NotImplementedException();
-    }
-  }
+  //public string Error => throw new NotImplementedException();
 
-/**********************************************************************************************************/
+  /**********************************************************************************************************/
   
   /* Конструктор класса */
   public RegistrationViewModel()

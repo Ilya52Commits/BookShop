@@ -49,7 +49,6 @@ internal sealed class AuthorizationViewModel : BaseViewModel
 
   /* Описание команд страницы */
   public RelayCommand AuthorizationClientCommand { get; }     // Проверка вводимых данных
-  public RelayCommand NavigateToProductPageCommand { get; }   // Переход на страницу продукта
   public RelayCommand NavigateToRegistrationCommand { get; }  // Переход на страницу регистрации
 
   /* Конструктор по умолчанию */
@@ -125,7 +124,8 @@ internal sealed class AuthorizationViewModel : BaseViewModel
         var mainWindow = Application.Current.MainWindow as MainWindow;
 
         // Навигирует к View авторизации
-        mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView(_dbContext.Users.First(user => user.Login == _login && user.Password == _password)));
+        mainWindow?.MainFrame.NavigationService.Navigate(
+          new ClientProductView(_dbContext.Users.First(user1 => user1.Login == _login && user1.Password == _password)));
       }
       // Выводится сообщение об ошибке
       else

@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:viewModels="clr-namespace:BookShopCore.ViewModels"
       mc:Ignorable="d"
-      d:DesignWidth="800"
       Title="RegistrationView">
 
     <!-- Подключение стилей -->

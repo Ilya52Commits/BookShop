@@ -19,7 +19,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
-        <!-- Как настроить colums -->
+        <!-- Как настроить columns -->
 
         <DataGrid  
             AutoGenerateColumns="False" 

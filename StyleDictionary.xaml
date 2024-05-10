@@ -11,8 +11,6 @@
     
     <!-- Стили для контейнера -->
     <Style x:Key="BorderContainerStyles" TargetType="Border">
-        <Setter Property="Margin" Value="100, 100, 100, 100"/>
-        <Setter Property="MaxWidth" Value="400"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderThickness" Value="2"/>
