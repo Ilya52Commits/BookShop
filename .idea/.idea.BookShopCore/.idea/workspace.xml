@@ -8,17 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6399ed25-6c42-46f3-808c-0373ac9ceda4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources/1a082e09-c508-455d-962e-8d8520a6a8a0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources/1a082e09-c508-455d-962e-8d8520a6a8a0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/shelf/Uncommitted_changes_before_Update_at_05_05_2024_14_06_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/shelf/Uncommitted_changes_before_Update_at_05_05_2024_14_06__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StyleDictionary.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/StyleDictionary.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/RegistrationView.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,17 +46,18 @@
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/0e8ece3526ef3575fb85de308b8a4cd5840f928e/src/EFCore.Relational/Query/Internal/SingleQueryingEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2d7eea252964e69be94cb9c847b371b23e4dd470/src/libraries/System.Private.CoreLib/src/System/Runtime/ExceptionServices/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6665f2e3e843578225e3796b83c5342a58c3f72bfef19eeee7aa90d157d4949/Application.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ad49093fbcdcf5c1455da627b83f3c367b31b18719d89c897f2d26d2a8b/WpfXamlLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/App.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://F:/Ilya/Programming/BookShopCore/ViewModels/RegistrationViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/RegistrationView.xaml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -129,7 +129,10 @@
       <workItem from="1714902813462" duration="8197000" />
       <workItem from="1715018776554" duration="1290000" />
       <workItem from="1715109580163" duration="6279000" />
-      <workItem from="1715338038768" duration="2378000" />
+      <workItem from="1715338038768" duration="2536000" />
+      <workItem from="1715452480808" duration="3150000" />
+      <workItem from="1715512045262" duration="1937000" />
+      <workItem from="1715535358636" duration="4160000" />
     </task>
     <task id="LOCAL-00001" summary="Провёл рефакторинг кода">
       <option name="closed" value="true" />
@@ -147,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714936029488</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Изменил параметры mainWindow">
+      <option name="closed" value="true" />
+      <created>1715340666963</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715340666964</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,10 +166,46 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Провёл рефакторинг кода" />
     <MESSAGE value="Добавление файла Unvommitted_changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавление файла Unvommitted_changes" />
+    <MESSAGE value="Изменил параметры mainWindow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменил параметры mainWindow" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs</url>
+          <line>63</line>
+          <properties documentPath="F:\Ilya\Programming\BookShopCore\ViewModels\ClientViewModels\ClientProductViewModel.cs" containingFunctionPresentation="Method 'BuyCommandExecute'">
+            <startOffsets>
+              <option value="2168" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2169" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="DotNetProject">
+        <watch expression="this" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -29,7 +29,7 @@ internal sealed class ClientProductViewModel : BaseViewModel
   }
 
   /* Описание команд страницы */
-  public RelayCommand<Book> AddToBucketCommand { get; }               // Команда купить
+  public RelayCommand<Book> AddToBucketCommand { get; set; }               // Команда купить
   public RelayCommand<User> NavigateToBasketCommand { get; }  // Переход на страницу корзины
 
   /* Конструктор по умолчанию */
@@ -50,7 +50,7 @@ internal sealed class ClientProductViewModel : BaseViewModel
   /// <summary>
   /// Метод перехода на страницу корзины
   /// </summary>
-  private void NavigateToBasketCommandExecute(User us)
+  private static void NavigateToBasketCommandExecute(User us)
   {
     var mainWindow = Application.Current.MainWindow as MainWindow;
 

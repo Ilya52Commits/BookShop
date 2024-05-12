@@ -3,7 +3,8 @@ using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 
 namespace BookShopCore.ViewModels.ClientViewModels;
-class BasketViewModel : BaseViewModel
+
+internal class BasketViewModel : BaseViewModel
 {
   private readonly DbContext _dbContext;
 
@@ -30,7 +31,7 @@ class BasketViewModel : BaseViewModel
 
     _user = user;
 
-    _selectBook = new ObservableCollection<Book>(_user.SelectedBooks);
+    _selectBook = new ObservableCollection<Book>(user.SelectedBooks);
 
 
     NavigateToClientProductPageCommand = new RelayCommand(NavigateToClientProductPageCommandExecute);

@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:ClientProductViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="800"
       Title="ClientProductView">
 
     <!-- Подключение стилей -->
@@ -13,13 +12,12 @@
         <ResourceDictionary Source="/./StyleDictionary.xaml"/>
     </Page.Resources>
 
-    <Grid>
+    <Grid Width="800" Height="500">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
-        <!-- Как настроить columns -->
 
         <DataGrid  
             AutoGenerateColumns="False" 
@@ -35,8 +33,7 @@
                 <DataGridTemplateColumn Header="Добавить" Width="auto" MinWidth="20">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.AddToBucketCommand, ElementName=ClientProdPage}"
-                                    CommandParameter="{Binding}" />
+                            <Button Command="{Binding DataContext.AddToBucketCommand, RelativeSource={RelativeSource AncestorType=viewModels:ClientProductViewModel},  ElementName=ClientProdPage}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
