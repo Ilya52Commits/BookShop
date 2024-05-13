@@ -3,8 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:ClientProductViewModel}"
       mc:Ignorable="d" 
+      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:ClientProductViewModel}"
+      x:Name="ClientProdPage"
       Title="ClientProductView">
 
     <!-- Подключение стилей -->
@@ -33,7 +34,11 @@
                 <DataGridTemplateColumn Header="Добавить" Width="auto" MinWidth="20">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.AddToBucketCommand, RelativeSource={RelativeSource AncestorType=viewModels:ClientProductViewModel},  ElementName=ClientProdPage}"/>
+                            <Button Command="{Binding DataContext.AddToBuscketCommand, 
+                                    ElementName=ClientProdPage}"  
+                                    CommandParameter="{Binding}"
+                                    Style="{DynamicResource ButtonNavigateStyles}"
+                                    Content="Добавить"/> <!--Как это работает-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

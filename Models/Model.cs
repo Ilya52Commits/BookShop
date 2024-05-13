@@ -1,19 +1,16 @@
-﻿using System.Text.RegularExpressions;
-
-namespace BookShopCore.Model;
+﻿namespace BookShopCore.Model;
 
 #region Модели таблиц
 /* Модель таблицы пользователя */
 public class User
 {
-
   public int Id { get; set; }                                 // Идентификатор пользователя
   public string Login { get; set; }                           // Логин пользователя
   public string Email { get; set; }                           // Почта пользователя
   public string Password { get; set; }                        // Пароль ползователя
   public string Role { get; set; }                            // Тип пользователя
   public bool IsValidateAdmin { get; set; } = false;          // Подтверждение на администратора
-  public ICollection<Book> SelectedBooks { get; set; } = new List<Book>();  // Коллекция выбранных книг
+  public ICollection<Book> SelectedBooks { get; set; } = [];  // Коллекция выбранных книг
 }
 
 /* Модель таблицы книг */ 

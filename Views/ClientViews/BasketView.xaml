@@ -3,27 +3,32 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:BasketViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="BasketView">
+      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:BasketViewModel}"
+      x:Name="ClientBuscket"
+      Title="BasketView" >
 
     <!-- Подключение стилей -->
     <Page.Resources>
         <ResourceDictionary Source="/./StyleDictionary.xaml"/>
     </Page.Resources>
 
-    <Grid>
+    <Grid Width="800" Height="500">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="70" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
 
+        <!-- Создание кнопки перехода на страницу авторизацию -->
+        <StackPanel>
+            <Button Command="{Binding NavigateToClientProductPageCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Назад"/>
+        </StackPanel>
         <DataGrid  
             AutoGenerateColumns="False" 
             Grid.Column="1" Grid.Row="0" 
             CanUserAddRows="False"
+            HorizontalAlignment="Left"
             ItemsSource="{Binding SelectBook}"  
             >
             <DataGrid.Columns>
@@ -31,12 +36,23 @@
                 <DataGridTextColumn IsReadOnly="True" Header="Автор" Binding="{Binding Author}" Width="*"/>
                 <DataGridTextColumn IsReadOnly="True" Header="Жанр" Binding="{Binding Genre}" Width="*"/>
                 <DataGridTextColumn IsReadOnly="True" Header="Цена" Binding="{Binding Price}" Width="*"/>
-                <DataGridCheckBoxColumn IsReadOnly="False" Header="Добавить в корзину" Width="*"/>
+                <DataGridTemplateColumn Header="Удалить" Width="auto" MinWidth="20">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.DeleteProductCommand, 
+                                    ElementName=ClientBuscket}"  
+                                    CommandParameter="{Binding}"
+                                    Style="{DynamicResource ButtonNavigateStyles}"
+                                    Content="Удалить"/>
+                            <!--Как это работает-->
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <!-- Создание кнопки перехода на страницу авторизацию -->
         <StackPanel Grid.Column="2" HorizontalAlignment="Right">
-            <Button Command="{Binding NavigateToBasketCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Купить"/>
+            <Button Command="{Binding BuyProductCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Купить"/>
         </StackPanel>
     </Grid>
 </Page>

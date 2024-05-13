@@ -12,7 +12,6 @@ internal sealed class ClientProductViewModel : BaseViewModel
   /* Переменная модели для взаимодействия с данными */
   private readonly DbContext _dbContext;
 
-
   /* Данные пользователя, вошедшему на страницу */
   private readonly User _user;
 
@@ -20,7 +19,7 @@ internal sealed class ClientProductViewModel : BaseViewModel
   private readonly ObservableCollection<Book> _books; 
   public ObservableCollection<Book> Books
   {
-    get => _books;          // Ввод значения
+    get => _books;          // Вывод значения
     protected init          // Изменение значения 
     {
       _books = value;       // Присваивание нового значения
@@ -29,8 +28,8 @@ internal sealed class ClientProductViewModel : BaseViewModel
   }
 
   /* Описание команд страницы */
-  public RelayCommand<Book> AddToBucketCommand { get; set; }               // Команда купить
-  public RelayCommand<User> NavigateToBasketCommand { get; }  // Переход на страницу корзины
+  public RelayCommand<Book> AddToBuscketCommand { get; set; } // Команда купить
+  public RelayCommand NavigateToBasketCommand { get; set; }   // Переход на страницу корзины
 
   /* Конструктор по умолчанию */
   public ClientProductViewModel(User user)
@@ -41,30 +40,41 @@ internal sealed class ClientProductViewModel : BaseViewModel
 
     Books = new ObservableCollection<Book>(_dbContext.Books); // Инициализация коллекции книг
 
-    AddToBucketCommand = new RelayCommand<Book>(BuyCommandExecute);                           // Инициализация команды покупки
-    NavigateToBasketCommand = new RelayCommand<User>(NavigateToBasketCommandExecute); // Инициализация команды перехода в корзину
-
+    AddToBuscketCommand = new RelayCommand<Book>(AddToBuscketCommandExecute);   // Инициализация команды покупки
+    NavigateToBasketCommand = new RelayCommand(NavigateToBasketCommandExecute); // Инициализация команды перехода в корзину
   }
 
   #region Методы класса
   /// <summary>
   /// Метод перехода на страницу корзины
   /// </summary>
-  private static void NavigateToBasketCommandExecute(User us)
+  private void NavigateToBasketCommandExecute()
   {
+    // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainWindow;
 
-    mainWindow?.MainFrame.NavigationService.Navigate(new BasketView(us));
+    // Навигирует к View авторизации
+    mainWindow?.MainFrame.NavigationService.Navigate(new BasketView(_dbContext.Users.First(user1 => user1.Id == _user.Id)));
   }
 
   /// <summary>
   /// Метод покупки товара
   /// </summary>
-  private void BuyCommandExecute(Book book)
+  private void AddToBuscketCommandExecute(Book book)
   {
-    _dbContext.Users.First(user => user.Id == _user.Id).SelectedBooks.Add(book);
+    // Поиск списка выбранных товаров у пользователя
+    var userSelectedBooks = _dbContext.Users.First(user => user.Id == _user.Id).SelectedBooks;
 
-    NavigateToBasketCommandExecute(_user);
+    // Поиск элемента товара
+    var isAlreadyHave = userSelectedBooks.Contains(book);
+    // Если он уже добавлен в корзину, то происходит выход из метода
+    if (isAlreadyHave) return;
+
+    // Поиск пользователя
+    userSelectedBooks.Add(book);
+
+    // Сохранение изменений
+    _dbContext.SaveChanges();
   }
   #endregion
 }
