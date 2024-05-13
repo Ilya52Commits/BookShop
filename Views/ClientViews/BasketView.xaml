@@ -13,7 +13,7 @@
         <ResourceDictionary Source="/./StyleDictionary.xaml"/>
     </Page.Resources>
 
-    <Grid Width="800" Height="500">
+    <Grid Width="800" Height="500" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70" />
             <ColumnDefinition Width="*" />

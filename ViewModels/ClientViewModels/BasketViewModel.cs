@@ -58,6 +58,8 @@ internal class BasketViewModel : BaseViewModel
     mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView(_dbContext.Users.First(user1 => user1.Id == _user.Id)));
   }
 
+  // ************************************************************************************************************
+
   /// <summary>
   /// Мето удаления товара из корзины
   /// </summary>
@@ -98,4 +100,6 @@ internal class BasketViewModel : BaseViewModel
     // Вывод сообщения об успешной покупке
     MessageBox.Show("Вы успешно купили товар!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
   }
+
+  // ************************************************************************************************************
 }

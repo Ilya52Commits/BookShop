@@ -1,8 +1,11 @@
 ﻿using BookShopCore.Model;
 using BookShopCore.Views;
 using GalaSoft.MvvmLight.Command;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BookShopCore.ViewModels;
 
@@ -34,9 +37,33 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
     set
     {
       _email = value;
-      OnPropertyChanged();
+      OnPropertyChanged(); 
     }
   }
+  public string this[string columnName] 
+  { 
+    get 
+    {
+      string error = String.Empty;
+      switch (columnName)
+      {
+        case "Email":
+          if (_email.Length < 0)
+          {
+            error = "Возраст должен быть больше 0 и меньше 100";
+          }
+          break;
+        case "Name":
+          //Обработка ошибок для свойства Name
+          break;
+        case "Position":
+          //Обработка ошибок для свойства Position
+          break;
+      }
+      return error;
+    }
+  }
+  string Error { get { throw new NotImplementedException(); } }
 
   /* Описание параметров для Password */
   private string _password;
@@ -66,40 +93,6 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
   public RelayCommand RegistrationClientCommand { get; }      // Добавление в базу данных
   public RelayCommand NavigateToAuthorizationCommand { get; }  // Навигация между View
   #endregion
-
-  /*********************************************************************************************************/
-  public string this[string columnName] 
-  {
-    get
-    {
-      var error = string.Empty;
-      switch (columnName)
-      {
-        case "Login":
-          if (Login.Length < 2)
-          {
-            error = "Недопустимый логин!";
-          }
-
-          bool containsNumbers = Regex.IsMatch(Login, "[\\d\\W]");
-          if (containsNumbers)
-          {
-            error = "Недопустимые символы логина!";
-          }
-
-          if (char.IsLower(Login[0]))
-          {
-            error = "Логин должен быть с большёй буквы!";
-          }
-          break;
-      }
-
-      return error; 
-    }  
-  }
-  //public string Error => throw new NotImplementedException();
-
-  /**********************************************************************************************************/
   
   /* Конструктор класса */
   public RegistrationViewModel()

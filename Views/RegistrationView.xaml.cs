@@ -12,4 +12,9 @@ public partial class RegistrationView : Page
   {
     InitializeComponent();
   }
+
+  private void TextBox_Error(object sender, ValidationErrorEventArgs e)
+  {
+    MessageBox.Show(e.Error.ErrorContent.ToString());
+  }
 }
