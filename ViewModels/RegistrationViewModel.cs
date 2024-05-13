@@ -1,23 +1,59 @@
-﻿using BookShopCore.Model;
+﻿using System.Collections;
+using BookShopCore.Model;
 using BookShopCore.Views;
 using GalaSoft.MvvmLight.Command;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
+using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 
 namespace BookShopCore.ViewModels;
 
 /* Главный клас ViewModel регистрации */
-internal sealed partial class RegistrationViewModel : BaseViewModel // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
+internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyDataErrorInfo // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
 {
+  private readonly Dictionary<string, List<string>> _errors = new();
+  
+  public bool HasErrors => _errors.Count > 0; 
+  
+  public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+  
+  public IEnumerable GetErrors(string? propertyName)
+  {
+    if (propertyName != null && _errors.TryGetValue(propertyName, out var value))
+    {
+      return value;
+    }
+
+    return Enumerable.Empty<string>();
+  }
+
+  private void Validate(string propertyName, object propertyValue)
+  {
+    var results = new List<ValidationResult>();
+    
+    Validator.TryValidateProperty(propertyValue, new ValidationContext(this){ MemberName = propertyName}, results);
+
+    if (results.Count != 0)
+    {
+      _errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList()!);
+      ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+    }
+    else
+    {
+      _errors.Remove(propertyName);
+      ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+    }
+  }
+  
   #region Поля класса
   /* Переменная модели для взаимодействия с данными */
   private readonly DbContext _dbContext;
 
   /* Описания параметров для Login */
   private string _login;
+  [Required(ErrorMessage = "Login is Required")]
   public string Login
   {
     get => _login;          // Вывод значения
@@ -25,66 +61,49 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
     set                     // Изменение значения
     {
       _login = value;       // Присваивание нового значения
+      Validate(nameof(Login), value);
       OnPropertyChanged();  // Вызов события изменения
     }
   }
 
   /* Описание параметров для Email */
   private string _email;
+  [Required(ErrorMessage = "Email is Required")]
   public string Email
   {
     get => _email;
     set
     {
       _email = value;
+      Validate(nameof(Email), value);
       OnPropertyChanged(); 
     }
   }
-  public string this[string columnName] 
-  { 
-    get 
-    {
-      string error = String.Empty;
-      switch (columnName)
-      {
-        case "Email":
-          if (_email.Length < 0)
-          {
-            error = "Возраст должен быть больше 0 и меньше 100";
-          }
-          break;
-        case "Name":
-          //Обработка ошибок для свойства Name
-          break;
-        case "Position":
-          //Обработка ошибок для свойства Position
-          break;
-      }
-      return error;
-    }
-  }
-  string Error { get { throw new NotImplementedException(); } }
 
   /* Описание параметров для Password */
   private string _password;
+  [Required(ErrorMessage = "Password is Required")]
   public string Password
   {
     get => _password;
     set
     {
       _password = value;
+      Validate(nameof(Password), value);
       OnPropertyChanged();
     }
   }
 
   /* Описание параметров для ConfigPassword */
   private string _confPassword;
+  [Required(ErrorMessage = "Confirm Password is Required")]
   public string ConfigPassword
   {
     get => _confPassword;
     set
     {
       _confPassword = value;
+      Validate(nameof(ConfigPassword), value);
       OnPropertyChanged();
     }
   }
@@ -239,4 +258,5 @@ internal sealed partial class RegistrationViewModel : BaseViewModel // Насл�
   private static partial Regex MyRegex1();
   #endregion
   #endregion
+
 }

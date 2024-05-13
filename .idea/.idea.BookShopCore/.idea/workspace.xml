@@ -8,16 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6399ed25-6c42-46f3-808c-0373ac9ceda4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources/1a082e09-c508-455d-962e-8d8520a6a8a0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources/1a082e09-c508-455d-962e-8d8520a6a8a0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/shelf/Uncommitted_changes_before_Update_at_05_05_2024_14_06_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/shelf/Uncommitted_changes_before_Update_at_05_05_2024_14_06__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/RegistrationView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/RegistrationView.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +51,7 @@
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="Toolset" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -68,32 +62,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Project.BookShopCore.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.4370861&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;SolutionBuilderGeneralOptionsPage&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Project.BookShopCore.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.4370861",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CodeLensConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ],
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Ilya\\AppData\\Local\\Symbols\\src&quot;
+    "rider.external.source.directories": [
+      "C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\Ilya\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="BookShopCore" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -185,23 +179,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Изменил параметры mainWindow" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs</url>
-          <line>63</line>
-          <properties documentPath="F:\Ilya\Programming\BookShopCore\ViewModels\ClientViewModels\ClientProductViewModel.cs" containingFunctionPresentation="Method 'BuyCommandExecute'">
-            <startOffsets>
-              <option value="2168" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2169" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="this" />

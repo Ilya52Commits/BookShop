@@ -43,15 +43,7 @@
                 <StackPanel Margin="0, 10, 0, 0">
                     <TextBlock Text="Логин" FontSize="20" />
                     <Border Style="{DynamicResource TextBoxBorderStyles}">
-                        <TextBox Style="{DynamicResource TextBoxStyles}">
-                            <TextBox.Text>
-                                <Binding Path="Login" NotifyOnValidationError="True">
-                                    <Binding.ValidationRules>
-                                        <DataErrorValidationRule />
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
+                        <TextBox Text="{Binding Login}" Style="{DynamicResource TextBoxStyles}" />
                     </Border>
                 </StackPanel>
 
@@ -59,15 +51,7 @@
                 <StackPanel Margin="0, 10, 0, 0">
                     <TextBlock Text="Email" FontSize="20" />
                     <Border Style="{DynamicResource TextBoxBorderStyles}">
-                        <TextBox Validation.Error="TextBox_Error" Style="{DynamicResource TextBoxStyles}">
-                            <TextBox.Text>
-                                <Binding Path="Email" NotifyOnValidationError="True">
-                                    <Binding.ValidationRules>
-                                        <DataErrorValidationRule />
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
+                        <TextBox Text="{Binding Email}" Style="{DynamicResource TextBoxStyles}" />
                     </Border>
                 </StackPanel>
 
