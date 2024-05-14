@@ -1,4 +1,7 @@
-﻿using BookShopCore.Views;
+﻿using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using BookShopCore.Views;
 using BookShopCore.Views.AdminViews;
 using BookShopCore.Views.ClientViews;
 using GalaSoft.MvvmLight.Command;
@@ -6,31 +9,94 @@ using System.Windows;
 
 namespace BookShopCore.ViewModels;
 
-internal sealed class AuthorizationViewModel : BaseViewModel
+internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorInfo
 {
+  #region Параметры валидации
+  /* Словарь для хранения ошибок валидации.
+   Ключ - имя свойства; 
+   Значение - список сообщений об ошибках */
+  private readonly Dictionary<string, List<string>> _errors = new();
+  
+  /* Это свойство, которое возвращает true, если есть ошибки валидации, и false, если ошибок нет */
+  public bool HasErrors => _errors.Count > 0; 
+  
+  /* Событие, которое вызывается при изменении ошибок валидации */
+  public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+  
+  /// <summary>
+  /// Метод, который возвращает список ошибок валидации для указанного свойства
+  /// </summary>
+  /// <param name="propertyName"></param>
+  /// <returns></returns>
+  public IEnumerable GetErrors(string? propertyName)
+  {
+    // Если propertyName не равно null и словарь _errors содержит ключ propertyName
+    if (propertyName != null && _errors.TryGetValue(propertyName, out var value))
+      // то метод возвращает список ошибок, связанных с указанным свойством
+      return value;
+    
+    // Метод возвращает пустой список
+    return Enumerable.Empty<string>();
+  }
+  
+  /// <summary>
+  /// Метод, который выполняет валидацию указанного свойства
+  /// </summary>
+  /// <param name="propertyName"></param>
+  /// <param name="propertyValue"></param>
+  private void Validate(string propertyName, object propertyValue)
+  {
+    var results = new List<ValidationResult>(); // Список результата валидации
+    
+    // Выполняется валидация значения propertyValue для указанного свойства propertyName
+    Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName}, results);
+
+    // Если список результатов не пустой
+    if (results.Count != 0)
+    {
+      // Ошибки валидации добавляются в словарь _errors с ключом, соответствующим имени свойства propertyName
+      _errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList()!);
+      // Вызывается событие ErrorsChanged, чтобы уведомить об изменении ошибок валидации для данного свойства
+      ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+    }
+    else
+    {
+      // Удаление запись об ошибке валидации для указанного свойства из словаря _errors
+      _errors.Remove(propertyName);
+      // Вызывается событие ErrorsChanged, чтобы уведомить об изменении ошибок валидации для данного свойства
+      ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+    }
+  }
+  #endregion
+  
   /* Переменная модели для взаимодействия с данными */
   private readonly DbContext _dbContext;
 
   /* Описание параметров для Login */
   private string _login;
-  public string Login       // Вывод значения
+  // Присвоение сообщения
+  [Required(ErrorMessage = "Недопустимый логин")]
+  public string Login                 // Вывод значения
   {
-    get => _login;          // Изменение значения
+    get => _login;                    // Изменение значения
     set
     {
-      _login = value;       // Присваивание нового значения
-      OnPropertyChanged();  // Вызов события изминения
+      _login = value;                 // Присваивание нового значения
+      Validate(nameof(Login), value); // Применение метода валидации
+      OnPropertyChanged();            // Вызов события изминения
     }
   }
 
   /* Описание параметров для Email */
   private string _email;
+  [Required(ErrorMessage = "Недопустимая почта")]
   public string Email
   {
     get => _email;
     set
     {
       _email = value;
+      Validate(nameof(Login), value);
       OnPropertyChanged();
     }
   }

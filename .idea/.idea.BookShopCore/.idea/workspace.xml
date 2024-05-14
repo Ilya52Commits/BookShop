@@ -9,9 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6399ed25-6c42-46f3-808c-0373ac9ceda4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/AuthorizationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/AuthorizationView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/RegistrationView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/RegistrationView.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,19 +40,25 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/0e8ece3526ef3575fb85de308b8a4cd5840f928e/src/EFCore.Relational/Query/Internal/SingleQueryingEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2d7eea252964e69be94cb9c847b371b23e4dd470/src/libraries/System.Private.CoreLib/src/System/Runtime/ExceptionServices/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/74eaac094039460b88cbb81a06bdd12d138a0/81/33e188e5/INotifyDataErrorInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6665f2e3e843578225e3796b83c5342a58c3f72bfef19eeee7aa90d157d4949/Application.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ad49093fbcdcf5c1455da627b83f3c367b31b18719d89c897f2d26d2a8b/WpfXamlLoader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/App.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/ClientViews/BasketView.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/RegistrationView.xaml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -127,6 +134,9 @@
       <workItem from="1715452480808" duration="3150000" />
       <workItem from="1715512045262" duration="1937000" />
       <workItem from="1715535358636" duration="4160000" />
+      <workItem from="1715679811201" duration="7946000" />
+      <workItem from="1715692978965" duration="4000" />
+      <workItem from="1715692986264" duration="751000" />
     </task>
     <task id="LOCAL-00001" summary="Провёл рефакторинг кода">
       <option name="closed" value="true" />
@@ -152,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715340666964</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Добавил валидацию для пустого значения ввода">
+      <option name="closed" value="true" />
+      <created>1715636265665</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715636265665</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,7 +194,8 @@
     <MESSAGE value="Провёл рефакторинг кода" />
     <MESSAGE value="Добавление файла Unvommitted_changes" />
     <MESSAGE value="Изменил параметры mainWindow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Изменил параметры mainWindow" />
+    <MESSAGE value="Добавил валидацию для пустого значения ввода" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил валидацию для пустого значения ввода" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -13,39 +13,63 @@ namespace BookShopCore.ViewModels;
 /* Главный клас ViewModel регистрации */
 internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyDataErrorInfo // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
 {
+  #region Параметры валидации
+  /* Словарь для хранения ошибок валидации.
+   Ключ - имя свойства; 
+   Значение - список сообщений об ошибках */
   private readonly Dictionary<string, List<string>> _errors = new();
   
+  /* Это свойство, которое возвращает true, если есть ошибки валидации, и false, если ошибок нет */
   public bool HasErrors => _errors.Count > 0; 
   
+  /* Событие, которое вызывается при изменении ошибок валидации */
   public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
   
+  /// <summary>
+  /// Метод, который возвращает список ошибок валидации для указанного свойства
+  /// </summary>
+  /// <param name="propertyName"></param>
+  /// <returns></returns>
   public IEnumerable GetErrors(string? propertyName)
   {
+    // Если propertyName не равно null и словарь _errors содержит ключ propertyName
     if (propertyName != null && _errors.TryGetValue(propertyName, out var value))
-    {
+      // то метод возвращает список ошибок, связанных с указанным свойством
       return value;
-    }
-
+    
+    // Метод возвращает пустой список
     return Enumerable.Empty<string>();
   }
-
+  
+  /// <summary>
+  /// Метод, который выполняет валидацию указанного свойства
+  /// </summary>
+  /// <param name="propertyName"></param>
+  /// <param name="propertyValue"></param>
   private void Validate(string propertyName, object propertyValue)
   {
-    var results = new List<ValidationResult>();
+    var results = new List<ValidationResult>(); // Список результата валидации
     
-    Validator.TryValidateProperty(propertyValue, new ValidationContext(this){ MemberName = propertyName}, results);
+    // Выполняется валидация значения propertyValue для указанного свойства propertyName
+    Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName}, results);
 
+    // Если список результатов не пустой
     if (results.Count != 0)
     {
+      // Ошибки валидации добавляются в словарь _errors с ключом, соответствующим имени свойства propertyName
       _errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList()!);
+      // Вызывается событие ErrorsChanged, чтобы уведомить об изменении ошибок валидации для данного свойства
       ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
     }
     else
     {
+      // Удаление запись об ошибке валидации для указанного свойства из словаря _errors
       _errors.Remove(propertyName);
+      // Вызывается событие ErrorsChanged, чтобы уведомить об изменении ошибок валидации для данного свойства
       ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
     }
   }
+  #endregion
   
   #region Поля класса
   /* Переменная модели для взаимодействия с данными */
@@ -53,22 +77,22 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
 
   /* Описания параметров для Login */
   private string _login;
-  [Required(ErrorMessage = "Login is Required")]
+  [Required(ErrorMessage = "Недопустимый логин")]
   public string Login
   {
-    get => _login;          // Вывод значения
+    get => _login;                    // Вывод значения
 
-    set                     // Изменение значения
+    set                               // Изменение значения
     {
-      _login = value;       // Присваивание нового значения
-      Validate(nameof(Login), value);
-      OnPropertyChanged();  // Вызов события изменения
+      _login = value;                 // Присваивание нового значения
+      Validate(nameof(Login), value); // Применение метода валидации
+      OnPropertyChanged();            // Вызов события изменения
     }
   }
 
   /* Описание параметров для Email */
   private string _email;
-  [Required(ErrorMessage = "Email is Required")]
+  [Required(ErrorMessage = "Недопустимая почта")]
   public string Email
   {
     get => _email;
@@ -82,7 +106,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
 
   /* Описание параметров для Password */
   private string _password;
-  [Required(ErrorMessage = "Password is Required")]
+  [Required(ErrorMessage = "Недопустимый пароль")]
   public string Password
   {
     get => _password;
@@ -96,7 +120,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
 
   /* Описание параметров для ConfigPassword */
   private string _confPassword;
-  [Required(ErrorMessage = "Confirm Password is Required")]
+  [Required(ErrorMessage = "Пароль не совпадает")]
   public string ConfigPassword
   {
     get => _confPassword;

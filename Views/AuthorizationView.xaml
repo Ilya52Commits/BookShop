@@ -47,16 +47,24 @@
                     <StackPanel Margin="0, 10, 0, 0">
                         <TextBlock Text="Логин" FontSize="20" />
                         <Border Style="{DynamicResource TextBoxBorderStyles}">
-                            <TextBox Text="{Binding Login}" Style="{DynamicResource TextBoxStyles}" />
+                            <TextBox x:Name="TextBoxLogin" Text="{Binding Login}" Style="{DynamicResource TextBoxStyles}" />
                         </Border>
+                        <TextBlock Text="{Binding ElementName=TextBoxLogin,
+                                    Path=(Validation.Errors)[0].ErrorContent}"
+                                    Foreground="Red" 
+                                    FontSize="13" />
                     </StackPanel>
 
                     <!-- Создание поля ввода пароля -->
                     <StackPanel Margin="0, 10, 0, 0">
                         <TextBlock Text="Пароль" FontSize="20" />
                         <Border Style="{DynamicResource TextBoxBorderStyles}">
-                            <TextBox Text="{Binding Password}" Style="{DynamicResource TextBoxStyles}" />
+                            <TextBox x:Name="TextBoxEmail" Text="{Binding Password}" Style="{DynamicResource TextBoxStyles}" />
                         </Border>
+                        <TextBlock Text="{Binding ElementName=TextBoxEmail,
+                                    Path=(Validation.Errors)[0].ErrorContent}"
+                                    Foreground="Red" 
+                                    FontSize="13" />
                     </StackPanel>
 
                     <!-- Создание кнопки обработчика вводимых данных -->
