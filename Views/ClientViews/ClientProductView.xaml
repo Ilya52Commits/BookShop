@@ -38,7 +38,7 @@
                                     ElementName=ClientProdPage}"  
                                     CommandParameter="{Binding}"
                                     Style="{DynamicResource ButtonNavigateStyles}"
-                                    Content="Добавить"/> <!--Как это работает-->
+                                    Content="Добавить"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

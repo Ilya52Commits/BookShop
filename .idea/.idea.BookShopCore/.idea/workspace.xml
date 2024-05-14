@@ -8,11 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6399ed25-6c42-46f3-808c-0373ac9ceda4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources/1a082e09-c508-455d-962e-8d8520a6a8a0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources/1a082e09-c508-455d-962e-8d8520a6a8a0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/AuthorizationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/AuthorizationView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/RegistrationView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,16 +39,27 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/0e8ece3526ef3575fb85de308b8a4cd5840f928e/src/EFCore.Relational/Query/Internal/SingleQueryingEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/efcore/0e8ece3526ef3575fb85de308b8a4cd5840f928e/src/EFCore/Internal/InternalDbSet.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2d7eea252964e69be94cb9c847b371b23e4dd470/src/libraries/System.Linq.Queryable/src/System/Linq/Queryable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2d7eea252964e69be94cb9c847b371b23e4dd470/src/libraries/System.Linq/src/System/Linq/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2d7eea252964e69be94cb9c847b371b23e4dd470/src/libraries/System.Private.CoreLib/src/System/ArgumentNullException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2d7eea252964e69be94cb9c847b371b23e4dd470/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2d7eea252964e69be94cb9c847b371b23e4dd470/src/libraries/System.Private.CoreLib/src/System/Reflection/MethodBaseInvoker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2d7eea252964e69be94cb9c847b371b23e4dd470/src/libraries/System.Private.CoreLib/src/System/Runtime/ExceptionServices/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/74eaac094039460b88cbb81a06bdd12d138a0/81/33e188e5/INotifyDataErrorInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b65ed2254d5d4cfc81c65139c240a3947600/b6/5a10e608/WeakAction`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1a88b4a860176dd5f825206bbebf3ee3d44ff3f058ceed9eb693c1eaa018/RoutedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/41b55a73ecec37407e264ceafaa271a56eea37e7cc5e533cd82c5164c6ebb4/ButtonBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4bda76b5cc453e1edf5d5c754c4a8215edbd3d3e4f80706dcf4f52a4f68979/EventRoute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6665f2e3e843578225e3796b83c5342a58c3f72bfef19eeee7aa90d157d4949/Application.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/89a2b53da2e32f22f450ecab5f59ea9f03bfe76b409627069931a786fcee/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ad49093fbcdcf5c1455da627b83f3c367b31b18719d89c897f2d26d2a8b/WpfXamlLoader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/App.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Views/ClientViews/BasketView.xaml.cs" root0="SKIP_HIGHLIGHTING" />
@@ -69,32 +80,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.BookShopCore.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "XThreadsFramesViewSplitterKey": "0.4370861",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CodeLensConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.BookShopCore.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.4370861&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "rider.external.source.directories": [
-      "C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Ilya\\AppData\\Local\\Symbols\\src"
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Ilya\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Ilya\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BookShopCore" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -136,7 +147,8 @@
       <workItem from="1715535358636" duration="4160000" />
       <workItem from="1715679811201" duration="7946000" />
       <workItem from="1715692978965" duration="4000" />
-      <workItem from="1715692986264" duration="751000" />
+      <workItem from="1715692986264" duration="3647000" />
+      <workItem from="1715715213394" duration="4233000" />
     </task>
     <task id="LOCAL-00001" summary="Провёл рефакторинг кода">
       <option name="closed" value="true" />
@@ -170,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715636265665</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Прописывание вывода сообщения при валидации; создание валидации при аутентификации">
+      <option name="closed" value="true" />
+      <created>1715694313416</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1715694313416</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,12 +215,36 @@
     <MESSAGE value="Добавление файла Unvommitted_changes" />
     <MESSAGE value="Изменил параметры mainWindow" />
     <MESSAGE value="Добавил валидацию для пустого значения ввода" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил валидацию для пустого значения ввода" />
+    <MESSAGE value="Прописывание вывода сообщения при валидации; создание валидации при аутентификации" />
+    <option name="LAST_COMMIT_MESSAGE" value="Прописывание вывода сообщения при валидации; создание валидации при аутентификации" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs</url>
+          <line>89</line>
+          <properties documentPath="F:\Ilya\Programming\BookShopCore\ViewModels\ClientViewModels\BasketViewModel.cs" containingFunctionPresentation="Method 'BuyProductCommandExecute'">
+            <startOffsets>
+              <option value="3340" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3403" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Frame#BookShopCore.ViewModels.ClientViewModels.BasketViewModel.DeleteProductCommandExecute" memberName="alo" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="this" />
+        <watch expression="new System.Collections.Generic.ICollectionDebugView&lt;BookShopCore.Model.Book&gt;(((BookShopCore.ViewModels.ClientViewModels.BasketViewModel) this)._user.SelectedBooks).Items[1]" />
       </configuration>
     </watches-manager>
   </component>

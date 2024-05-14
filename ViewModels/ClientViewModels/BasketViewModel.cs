@@ -3,6 +3,7 @@ using BookShopCore.Views.ClientViews;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookShopCore.ViewModels.ClientViewModels;
 
@@ -16,7 +17,7 @@ internal class BasketViewModel : BaseViewModel
   private readonly User _user;
 
   /* Коллекция книг для обращения к базе данных */
-  private ObservableCollection<Book> _selectBook; 
+  private readonly ObservableCollection<Book> _selectBook; 
   public ObservableCollection<Book> SelectBook
   {
     get => _selectBook;     // Вывод значения
@@ -67,8 +68,12 @@ internal class BasketViewModel : BaseViewModel
   private void DeleteProductCommandExecute(Book book)
   {
     // Удаление товара из списка выбранных товаров
-    _dbContext.Users.First(user1 => user1.Id == _user.Id).SelectedBooks.Remove(book);
+    var alo1 =  _dbContext.Books.First(book1 => book1.Id == book.Id);
+    
+    var alo =  _dbContext.Users.First(user => user.Id == _user.Id);
 
+    alo.SelectedBooks.Remove(alo1);
+ 
     // Удаления из колекции для отображения
     _selectBook.Remove(book);
 
@@ -81,21 +86,16 @@ internal class BasketViewModel : BaseViewModel
   /// </summary>
   private void BuyProductCommandExecute()
   {
-    // Поиск списка выбранных элементов пользователя
-    var userSelectedBooks = _dbContext.Users.First(user1 => user1.Id == _user.Id).SelectedBooks;
-
-    // Цикл для удаления элементов
-    foreach (var book in _user.SelectedBooks)
-    {
-      // Удаление элементов
-      _dbContext.Users.First(user1 => user1.Id == _user.Id).SelectedBooks.Remove(book);
-    }
-
+    var dbContext = new DbContext();
+    var alo1 =  dbContext.Users.First(user => user.Id == _user.Id);
+    var alo =  dbContext.Users.First(user => user.Id == _user.Id).SelectedBooks.ToList();
+    alo1.SelectedBooks.Clear();
+    
     // Очистка списка для отображения
     _selectBook.Clear();
     
     // Сохранение изменений
-    _dbContext.SaveChanges();
+    dbContext.SaveChanges();
 
     // Вывод сообщения об успешной покупке
     MessageBox.Show("Вы успешно купили товар!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
