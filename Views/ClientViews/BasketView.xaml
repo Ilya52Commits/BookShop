@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:BasketViewModel}"
+      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" 
+      d:DataContext="{d:DesignInstance Type=viewModels:BasketViewModel}"
       x:Name="ClientBuscket"
       Title="BasketView" >
 
@@ -13,7 +14,12 @@
         <ResourceDictionary Source="/./StyleDictionary.xaml"/>
     </Page.Resources>
 
-    <Grid Width="800" Height="500" Background="White">
+    <!-- Создание содержимого страницы -->
+    <Grid Width="800" Background="White">
+        <!-- Параметры для Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70" />
             <ColumnDefinition Width="*" />
@@ -22,8 +28,12 @@
 
         <!-- Создание кнопки перехода на страницу авторизацию -->
         <StackPanel>
-            <Button Command="{Binding NavigateToClientProductPageCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Назад"/>
+            <Button 
+                Command="{Binding NavigateToClientProductPageCommand}" 
+                Style="{DynamicResource ButtonNavigateStyles}" 
+                Content="Назад"/>
         </StackPanel>
+        <!-- Создание поля для выбранных товаров -->
         <DataGrid  
             AutoGenerateColumns="False" 
             Grid.Column="1" Grid.Row="0" 
@@ -31,12 +41,32 @@
             HorizontalAlignment="Left"
             ItemsSource="{Binding SelectBook}"  
             >
+            <!-- Параметры таблицы товаров -->
             <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Header="Название" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn IsReadOnly="True" Header="Автор" Binding="{Binding Author}" Width="*"/>
-                <DataGridTextColumn IsReadOnly="True" Header="Жанр" Binding="{Binding Genre}" Width="*"/>
-                <DataGridTextColumn IsReadOnly="True" Header="Цена" Binding="{Binding Price}" Width="*"/>
-                <DataGridTemplateColumn Header="Удалить" Width="auto" MinWidth="20">
+                <DataGridTextColumn 
+                    Binding="{Binding Name}" 
+                    IsReadOnly="True"  
+                    Width="*" 
+                    Header="Название"/>
+                <DataGridTextColumn  
+                    Binding="{Binding Author}" 
+                    IsReadOnly="True" 
+                    Width="*" 
+                    Header="Автор" />
+                <DataGridTextColumn 
+                    Binding="{Binding Genre}" 
+                    IsReadOnly="True" 
+                    Width="*" 
+                    Header="Жанр" />
+                <DataGridTextColumn 
+                    Binding="{Binding Price}" 
+                    IsReadOnly="True"
+                    Width="*" 
+                    Header="Цена"/>
+                <DataGridTemplateColumn 
+                    Header="Удалить"
+                    Width="auto" 
+                    MinWidth="20">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.DeleteProductCommand, 
@@ -44,7 +74,6 @@
                                     CommandParameter="{Binding}"
                                     Style="{DynamicResource ButtonNavigateStyles}"
                                     Content="Удалить"/>
-                            <!--Как это работает-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -52,7 +81,10 @@
         </DataGrid>
         <!-- Создание кнопки перехода на страницу авторизацию -->
         <StackPanel Grid.Column="2" HorizontalAlignment="Right">
-            <Button Command="{Binding BuyProductCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Купить"/>
+            <Button 
+                Command="{Binding BuyProductCommand}" 
+                Style="{DynamicResource ButtonNavigateStyles}" 
+                Content="Купить"/>
         </StackPanel>
     </Grid>
 </Page>

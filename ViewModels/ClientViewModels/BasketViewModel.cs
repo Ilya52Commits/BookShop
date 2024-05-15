@@ -3,7 +3,6 @@ using BookShopCore.Views.ClientViews;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookShopCore.ViewModels.ClientViewModels;
 
@@ -36,11 +35,11 @@ internal class BasketViewModel : BaseViewModel
   /* Конструктор по умолчанию */
   public BasketViewModel(User user)
   {
-    _dbContext = new DbContext();                                     // Инициализация контекста базы данных
+    _dbContext = new DbContext();                                       // Инициализация контекста базы данных
 
-    _user = user;                                                     // Инициализация пользователя
+    _user = user;                                                       // Инициализация пользователя
 
-    _selectBook = new ObservableCollection<Book>(user.SelectedBooks); // Инициализация коллекции выбронных книг
+    _selectBook = new ObservableCollection<Book>(user.SelectedBooks);   // Инициализация коллекции выбронных книг
 
     NavigateToClientProductPageCommand = new RelayCommand(NavigateToClientProductPageCommandExecute); // Инициализация команды перехода на страницу продуктов
     DeleteProductCommand = new RelayCommand<Book>(DeleteProductCommandExecute);                       // Инициализация команды удаления продукта из корзины
@@ -59,20 +58,20 @@ internal class BasketViewModel : BaseViewModel
     mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView(_dbContext.Users.First(user1 => user1.Id == _user.Id)));
   }
 
-  // ************************************************************************************************************
-
   /// <summary>
   /// Мето удаления товара из корзины
   /// </summary>
   /// <param name="book"></param>
   private void DeleteProductCommandExecute(Book book)
   {
-    // Удаление товара из списка выбранных товаров
-    var alo1 =  _dbContext.Books.First(book1 => book1.Id == book.Id);
-    
-    var alo =  _dbContext.Users.First(user => user.Id == _user.Id);
+    // Поиск пользователя, из списка которого будет удалён товар
+    var deletingUser =  _dbContext.Users.First(user => user.Id == _user.Id);
 
-    alo.SelectedBooks.Remove(alo1);
+    // Поиск удаляемой книги
+    var retrievableBook =  _dbContext.Books.First(book1 => book1.Id == book.Id);
+
+    // Удаление книги
+    deletingUser.SelectedBooks.Remove(retrievableBook);
  
     // Удаления из колекции для отображения
     _selectBook.Remove(book);
@@ -86,20 +85,25 @@ internal class BasketViewModel : BaseViewModel
   /// </summary>
   private void BuyProductCommandExecute()
   {
-    var dbContext = new DbContext();
-    var alo1 =  dbContext.Users.First(user => user.Id == _user.Id);
-    var alo =  dbContext.Users.First(user => user.Id == _user.Id).SelectedBooks.ToList();
-    alo1.SelectedBooks.Clear();
+    // Поиск пользователя, который осуществляет покупку
+    var buyingUser = _dbContext.Users.First(user => user.Id == _user.Id);
+
+    // Проход по списку товаров
+    foreach (var book in _selectBook)
+    {
+      // Поиск книги для покупки
+      var shoppableBook = _dbContext.Books.First(book1 => book1.Id == book.Id);
+      // Удаление книги из списка выбранных
+      buyingUser.SelectedBooks.Remove(shoppableBook);
+    }
     
     // Очистка списка для отображения
     _selectBook.Clear();
     
     // Сохранение изменений
-    dbContext.SaveChanges();
+    _dbContext.SaveChanges();
 
     // Вывод сообщения об успешной покупке
     MessageBox.Show("Вы успешно купили товар!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
   }
-
-  // ************************************************************************************************************
 }

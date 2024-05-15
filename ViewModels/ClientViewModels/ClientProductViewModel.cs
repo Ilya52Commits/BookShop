@@ -28,7 +28,7 @@ internal sealed class ClientProductViewModel : BaseViewModel
   }
 
   /* Описание команд страницы */
-  public RelayCommand<Book> AddToBuscketCommand { get; set; } // Команда купить
+  public RelayCommand<Book> AddToBascketCommand { get; set; } // Команда купить
   public RelayCommand NavigateToBasketCommand { get; set; }   // Переход на страницу корзины
 
   /* Конструктор по умолчанию */
@@ -40,7 +40,7 @@ internal sealed class ClientProductViewModel : BaseViewModel
 
     Books = new ObservableCollection<Book>(_dbContext.Books); // Инициализация коллекции книг
 
-    AddToBuscketCommand = new RelayCommand<Book>(AddToBuscketCommandExecute);   // Инициализация команды покупки
+    AddToBascketCommand = new RelayCommand<Book>(AddToBascketCommandExecute);   // Инициализация команды покупки
     NavigateToBasketCommand = new RelayCommand(NavigateToBasketCommandExecute); // Инициализация команды перехода в корзину
   }
 
@@ -60,7 +60,7 @@ internal sealed class ClientProductViewModel : BaseViewModel
   /// <summary>
   /// Метод покупки товара
   /// </summary>
-  private void AddToBuscketCommandExecute(Book book)
+  private void AddToBascketCommandExecute(Book book)
   {
     // Поиск списка выбранных товаров у пользователя
     var userSelectedBooks = _dbContext.Users.First(user => user.Id == _user.Id).SelectedBooks;

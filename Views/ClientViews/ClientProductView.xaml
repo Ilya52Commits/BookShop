@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" d:DataContext="{d:DesignInstance Type=viewModels:ClientProductViewModel}"
+      xmlns:viewModels="clr-namespace:BookShopCore.ViewModels.ClientViewModels" 
+      d:DataContext="{d:DesignInstance Type=viewModels:ClientProductViewModel}"
       x:Name="ClientProdPage"
       Title="ClientProductView">
 
@@ -13,28 +14,54 @@
         <ResourceDictionary Source="/./StyleDictionary.xaml"/>
     </Page.Resources>
 
-    <Grid Width="800" Height="500" Background="White">
+    <!-- Создание содержимого страницы -->
+    <Grid Width="800" Background="White">
+        <!-- Параметры для Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
 
+        <!-- Создание поля для товаров -->
         <DataGrid  
             AutoGenerateColumns="False" 
             Grid.Column="1" Grid.Row="0" 
             CanUserAddRows="False"
             ItemsSource="{Binding Books}"  
             >
+            <!-- Параметры таблицы товаров -->
             <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Header="Название" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn IsReadOnly="True" Header="Автор" Binding="{Binding Author}" Width="*"/>
-                <DataGridTextColumn IsReadOnly="True" Header="Жанр" Binding="{Binding Genre}" Width="*"/>
-                <DataGridTextColumn IsReadOnly="True" Header="Цена" Binding="{Binding Price}" Width="*"/>
-                <DataGridTemplateColumn Header="Добавить" Width="auto" MinWidth="20">
+                <DataGridTextColumn 
+                    Binding="{Binding Name}"
+                    IsReadOnly="True" 
+                    Width="*"
+                    Header="Название"/>
+                <DataGridTextColumn 
+                    Binding="{Binding Author}" 
+                    IsReadOnly="True"
+                    Width="*" 
+                    Header="Автор"/>
+                <DataGridTextColumn 
+                    Binding="{Binding Genre}" 
+                    IsReadOnly="True"  
+                    Width="*" 
+                    Header="Жанр"/>
+                <DataGridTextColumn 
+                    Binding="{Binding Price}" 
+                    IsReadOnly="True"  
+                    Width="*" 
+                    Header="Цена"/>
+                <DataGridTemplateColumn  
+                    Width="auto" 
+                    MinWidth="20" 
+                    Header="Добавить">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Command="{Binding DataContext.AddToBuscketCommand, 
+                        <DataTemplate>  
+                            <Button Command="{Binding DataContext.AddToBascketCommand, 
                                     ElementName=ClientProdPage}"  
                                     CommandParameter="{Binding}"
                                     Style="{DynamicResource ButtonNavigateStyles}"
@@ -46,7 +73,10 @@
         </DataGrid>
         <!-- Создание кнопки перехода на страницу авторизацию -->
         <StackPanel Grid.Column="2" HorizontalAlignment="Right">
-            <Button Command="{Binding NavigateToBasketCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Корзина"/>
+            <Button 
+                Command="{Binding NavigateToBasketCommand}" 
+                Style="{DynamicResource ButtonNavigateStyles}" 
+                Content="Корзина"/>
         </StackPanel>
     </Grid>
 </Page>
