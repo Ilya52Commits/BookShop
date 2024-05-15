@@ -45,8 +45,7 @@
                 Width="*"
                 Header="Название"/>
                 <DataGridTextColumn 
-                Binding="{Binding Author}" 
-                IsReadOnly="True"
+                Binding="{Binding Author}"
                 Width="*" 
                 Header="Автор"/>
                 <DataGridTextColumn 
@@ -60,24 +59,10 @@
                 <DataGridTemplateColumn  
                     Width="auto" 
                     MinWidth="20" 
-                    Header="Редактировать">
+                    Header="Удалить">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.AddToBascketCommand, 
-                                ElementName=AdminProdPage}"  
-                                CommandParameter="{Binding}"
-                                Style="{DynamicResource ButtonNavigateStyles}"
-                                Content="Редактировать"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  
-                    Width="auto" 
-                    MinWidth="20" 
-                    Header="Добавить">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Command="{Binding DataContext.AddToBascketCommand, 
+                            <Button Command="{Binding DataContext.DeleteProductCommand, 
                                 ElementName=AdminProdPage}"  
                                 CommandParameter="{Binding}"
                                 Style="{DynamicResource ButtonNavigateStyles}"
@@ -90,6 +75,7 @@
         <!-- Создание кнопки перехода на страницу авторизацию -->
         <StackPanel Grid.Column="2" HorizontalAlignment="Right">
             <Button  
+                Command="{Binding AddNewBookCommand}"
                 Style="{DynamicResource ButtonNavigateStyles}" 
                 Content="Добавить товар"/>
         </StackPanel>

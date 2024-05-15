@@ -9,12 +9,11 @@ namespace BookShopCore.Views.AdminViews;
 /// </summary>
 public partial class AdminUserView : Page
 {
-  private User user;
-
   public AdminUserView(User user)
   {
     InitializeComponent();
 
+    /* Привязка объекта ViewModel к контексту данных */
     DataContext = new AdminUserViewModel(user);
   }
 }

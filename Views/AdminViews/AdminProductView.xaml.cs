@@ -13,6 +13,7 @@ public partial class AdminProductView : Page
   {
     InitializeComponent();
 
+    /* Привязка объекта ViewModel к контексту данных */
     DataContext = new AdminProductViewModel(user);
   }
 }

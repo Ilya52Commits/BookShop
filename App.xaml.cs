@@ -17,7 +17,7 @@ public partial class App
   private void AddTheMainAdmin()
   {
     // Поиск главного админа в базе данных
-    var admin = _dbContext.Users.FirstOrDefault(a => a.Login == "Admin" && a.Password == "Admin" && a.Email == "Admin" && a.Role == "Admin" && a.IsValidateAdmin == true);
+    var admin = _dbContext.Users.FirstOrDefault(a => a.Login == "Admin" && a.Password == "Admin" && a.Email == "Admin" && a.Role == "Admin");
     // Если он присутствует, то происходит выход из метода
     if (admin != null) return;
 
@@ -28,7 +28,6 @@ public partial class App
       Email = "Admin",        // Присвоение почты
       Password = "Admin",     // Присвоение пароля
       Role = "Admin",         // Присвоение типа
-      IsValidateAdmin = true  // Присвоение валидации
     };
 
     // Добавление и сохранение базы данных

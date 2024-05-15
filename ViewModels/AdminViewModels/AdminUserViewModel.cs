@@ -32,6 +32,8 @@ internal class AdminUserViewModel : BaseViewModel
   /* Описание команд страницы */
   public RelayCommand NavigateToAuthorizationCommand { get; set; }    // Команда перехода на страницу авторизации
   public RelayCommand NavigateToAdminProductPageCommand { get; set; } // Команда перехода на страницу продуктов админа
+  public RelayCommand<User> UserDeletionCommand { get; set; }         // Команда удаления пользователя
+  public RelayCommand<User> UserEditCommand { get; set; }             // Команда редактирования пользователя
   #endregion
 
   /* Конструктор класса */
@@ -45,19 +47,23 @@ internal class AdminUserViewModel : BaseViewModel
 
     NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationCommandExecute);       // Инициализация команды перехода на страницу авторизации
     NavigateToAdminProductPageCommand = new RelayCommand(NavigateToAdminProductPageCommandExecute); // Инициализация команды перехода на страницу продуктов админа
+    UserDeletionCommand = new RelayCommand<User>(UserDeletionCommadExecute);                        // Инициализация команды удаления пользователя
   }
 
+  #region Методы класса
   /// <summary>
   /// Метод перехода на страницу продуктов админа
   /// </summary>
   /// <exception cref="NotImplementedException"></exception>
   private void NavigateToAdminProductPageCommandExecute()
   {
+    _dbContext.SaveChanges();
+
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainWindow;
 
     // Навигирует к View авторизации
-    mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView(_dbContext.Users.First(user1 => user1.Id == _user.Id)));
+    mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView(_dbContext.Users.First(user => user.Id == _user.Id)));
   }
 
   /// <summary>
@@ -66,10 +72,44 @@ internal class AdminUserViewModel : BaseViewModel
   /// <exception cref="NotImplementedException"></exception>
   private void NavigateToAuthorizationCommandExecute()
   {
+    _dbContext.SaveChanges();
+
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainWindow;
 
     // Навигирует к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
   }
+
+  /// <summary>
+  /// Метод удаления пользователя
+  /// </summary>
+  private void UserDeletionCommadExecute(User deletionUser)
+  {
+    // Если пользователь удаляет себя
+    if (deletionUser.Id == _user.Id) 
+    {
+      // Появляется сообщение о невозможности удаления
+      MessageBox.Show("Невозможно удалить себя!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+      return;
+    }
+
+    // Если пользователь удаляет админа
+    if (deletionUser.Role == "Admin")
+    {
+      // Появляется сообщение о невозможности удаления
+      MessageBox.Show("Невозможно удалить админа!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+      return; 
+    }
+
+    // Удаление пользователя из базы данных
+    _dbContext.Users.Remove(deletionUser);
+
+    // Сохранение изменений
+    _dbContext.SaveChanges();
+
+    // Удаление пользователя из списка
+    _users.Remove(deletionUser);
+  }
+  #endregion
 }

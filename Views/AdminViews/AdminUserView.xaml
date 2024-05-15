@@ -2,8 +2,11 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:adminviewmodels="clr-namespace:BookShopCore.ViewModels.AdminViewModels" 
+      d:DataContext="{d:DesignInstance Type=adminviewmodels:AdminUserViewModel}"
       mc:Ignorable="d" 
+      x:Name="AdminUserPage"
       Title="AdminUserView">
 
     <!-- Подключение стилей -->
@@ -20,29 +23,31 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="110" />
+            <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
 
         <StackPanel>
             <Button 
-             Command="{Binding NavigateToAuthorizationCommand}" 
-             Style="{DynamicResource ButtonNavigateStyles}" 
-             Content="Назад"/>
+                Command="{Binding NavigateToAuthorizationCommand}" 
+                Style="{DynamicResource ButtonNavigateStyles}" 
+                Content="Назад"/>
             <Button 
                 Command="{Binding NavigateToAdminProductPageCommand}" 
-                Style="{DynamicResource ButtonNavigateStyles}" 
+                Style="{DynamicResource ButtonNavigateStyles}"
+                Margin="0, 10, 0, 0"
                 Content="Продукты"/>
         </StackPanel>
         <!-- Создание поля для товаров -->
         <DataGrid  
-         AutoGenerateColumns="False" 
-         Grid.Column="1" Grid.Row="0" 
-         CanUserAddRows="False"
-         ItemsSource="{Binding Users}">
+            AutoGenerateColumns="False" 
+            Grid.Column="1" Grid.Row="0" 
+            CanUserAddRows="False"
+            ItemsSource="{Binding Users}">
             <!-- Параметры таблицы товаров -->
             <DataGrid.Columns>
                 <DataGridTextColumn 
                     Binding="{Binding Login}"
+                    IsReadOnly="True"
                     Width="*"
                     Header="Логин"/>
                 <DataGridTextColumn 
@@ -52,6 +57,7 @@
                     Header="Почта"/>
                 <DataGridTextColumn 
                     Binding="{Binding Password}"  
+                    IsReadOnly="True"
                     Width="*" 
                     Header="Пароль"/>
                 <DataGridTextColumn 
@@ -61,38 +67,19 @@
                 <DataGridTemplateColumn  
                     Width="auto" 
                     MinWidth="20" 
-                    Header="Редактировать">
+                    Header="Удалить">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.AddToBascketCommand, 
-                             ElementName=AdminProdPage}"  
-                             CommandParameter="{Binding}"
-                             Style="{DynamicResource ButtonNavigateStyles}"
-                             Content="Редактировать"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  
-                 Width="auto" 
-                 MinWidth="20" 
-                 Header="Добавить">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Command="{Binding DataContext.AddToBascketCommand, 
-                             ElementName=AdminProdPage}"  
-                             CommandParameter="{Binding}"
-                             Style="{DynamicResource ButtonNavigateStyles}"
-                             Content="Удалить"/>
+                            <Button 
+                                Command="{Binding DataContext.UserDeletionCommand, 
+                                ElementName=AdminUserPage}"  
+                                CommandParameter="{Binding}"
+                                Style="{DynamicResource ButtonNavigateStyles}"
+                                Content="Удалить"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <!-- Создание кнопки перехода на страницу авторизацию -->
-        <StackPanel Grid.Column="2" HorizontalAlignment="Right">
-            <Button  
-             Style="{DynamicResource ButtonNavigateStyles}" 
-             Content="Добавить товар"/>
-        </StackPanel>
     </Grid>
 </Page>

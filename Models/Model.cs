@@ -4,13 +4,12 @@
 /* Модель таблицы пользователя */
 public class User
 {
-  public int Id { get; init; }                                 // Идентификатор пользователя
-  public string Login { get; init; }                           // Логин пользователя
-  public string Email { get; init; }                           // Почта пользователя
-  public string Password { get; init; }                        // Пароль ползователя
-  public string Role { get; init; }                            // Тип пользователя
-  public bool IsValidateAdmin { get; set; } = false;          // Подтверждение на администратора
-  public ICollection<Book> SelectedBooks { get; set; } = [];  // Коллекция выбранных книг
+  public int Id { get; init; }                                  // Идентификатор пользователя
+  public string Login { get; init; }                            // Логин пользователя
+  public string Email { get; init; }                            // Почта пользователя
+  public string Password { get; init; }                         // Пароль ползователя
+  public string Role { get; init; }                             // Тип пользователя
+  public ICollection<Book> SelectedBooks { get; set; } = [];    // Коллекция выбранных книг
 }
 
 /* Модель таблицы книг */ 

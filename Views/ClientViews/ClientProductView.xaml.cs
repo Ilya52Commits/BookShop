@@ -13,6 +13,7 @@ public partial class ClientProductView : Page
   {
     InitializeComponent();
 
+    /* Привязка объекта ViewModel к контексту данных */
     DataContext = new ClientProductViewModel(user);
   }
 }

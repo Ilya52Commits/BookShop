@@ -10,6 +10,7 @@ using BookShopCore.Views.ManagerViews;
 
 namespace BookShopCore.ViewModels;
 
+/* Главный клас ViewModel авторизации */
 internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorInfo
 {
   #region Параметры валидации
@@ -154,7 +155,7 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
     {
       // Выполнение запроса к бд для проверки на главного админа
       var mainAdmin = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password
-                                                  && u.Role == "Admin" && u.IsValidateAdmin == true);
+                                                  && u.Role == "Admin");
 
       // Если пользователь является админом
       if (mainAdmin != null)
@@ -167,7 +168,7 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
 
         // Навигирует к View авторизации
         mainWindow?.MainFrame.NavigationService.Navigate(
-          new AdminUserView(_dbContext.Users.First(user => user.Login == "Admin" && user.Password == "Admin" && user.Role == "Admin" && user.IsValidateAdmin == true)));
+          new AdminUserView(_dbContext.Users.First(user => user.Login == "Admin" && user.Password == "Admin" && user.Role == "Admin")));
 
         return; 
       }
@@ -176,18 +177,18 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
         MessageBox.Show("Вы не создатель!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
     }
 
-    var admin = _dbContext.Users.FirstOrDefault(admin => admin.Login == _login && admin.Password == _password && admin.Role == "Admin" && admin.IsValidateAdmin == true);
+    var admin = _dbContext.Users.FirstOrDefault(admin => admin.Login == _login && admin.Password == _password && admin.Role == "Admin");
     if (admin !=  null)
     {
       // Выводится сообщение об успешном входе в систему
-      MessageBox.Show("Добрый день, менеджер!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+      MessageBox.Show("Добрый день, админ!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
 
       // Получение экземпляра главного окна 
       var mainWindow = Application.Current.MainWindow as MainWindow;
 
       // Переход на страницу продуктов менеджера
       mainWindow?.MainFrame.NavigationService.Navigate(
-        new AdminUserView(_dbContext.Users.First(admin => admin.Login == _login && admin.Password == _password && admin.Role == "Admin" && admin.IsValidateAdmin == true)));
+        new AdminUserView(_dbContext.Users.First(admin => admin.Login == _login && admin.Password == _password && admin.Role == "Admin")));
 
       return; 
     }
