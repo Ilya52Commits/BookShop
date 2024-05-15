@@ -1,4 +1,5 @@
 ﻿using BookShopCore.Model;
+using BookShopCore.Views;
 using BookShopCore.Views.ClientViews;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
@@ -28,8 +29,9 @@ internal sealed class ClientProductViewModel : BaseViewModel
   }
 
   /* Описание команд страницы */
-  public RelayCommand<Book> AddToBascketCommand { get; set; } // Команда купить
-  public RelayCommand NavigateToBasketCommand { get; set; }   // Переход на страницу корзины
+  public RelayCommand<Book> AddToBascketCommand { get; set; }       // Команда купить
+  public RelayCommand NavigateToBasketCommand { get; set; }         // Переход на страницу корзины
+  public RelayCommand NavigateToAuthorizationCommand { get; set; }  // Переход на страницу авторизации
 
   /* Конструктор по умолчанию */
   public ClientProductViewModel(User user)
@@ -40,8 +42,21 @@ internal sealed class ClientProductViewModel : BaseViewModel
 
     Books = new ObservableCollection<Book>(_dbContext.Books); // Инициализация коллекции книг
 
-    AddToBascketCommand = new RelayCommand<Book>(AddToBascketCommandExecute);   // Инициализация команды покупки
-    NavigateToBasketCommand = new RelayCommand(NavigateToBasketCommandExecute); // Инициализация команды перехода в корзину
+    AddToBascketCommand = new RelayCommand<Book>(AddToBascketCommandExecute);                 // Инициализация команды покупки
+    NavigateToBasketCommand = new RelayCommand(NavigateToBasketCommandExecute);               // Инициализация команды перехода в корзину
+    NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationCommandExecute); // Инициалзиация команды перехода на авторизацию
+  }
+
+  /// <summary>
+  /// Метод перехода на страницу авторизации
+  /// </summary>
+  private void NavigateToAuthorizationCommandExecute()
+  {
+    // Получение экземпляра главного окна
+    var mainWindow = Application.Current.MainWindow as MainWindow;
+
+    // Навигирует к View авторизации
+    mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
   }
 
   #region Методы класса

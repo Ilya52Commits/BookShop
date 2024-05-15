@@ -21,11 +21,17 @@
             <RowDefinition Height="500"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="70" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
-
+        
+        <StackPanel>
+            <Button 
+            Command="{Binding NavigateToAuthorizationCommand}" 
+            Style="{DynamicResource ButtonNavigateStyles}" 
+            Content="Назад"/>
+        </StackPanel>
         <!-- Создание поля для товаров -->
         <DataGrid  
             AutoGenerateColumns="False" 

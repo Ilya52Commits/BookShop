@@ -133,8 +133,8 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   }
 
   /* Описание команд страницы */
-  public RelayCommand RegistrationClientCommand { get; }      // Добавление в базу данных
-  public RelayCommand NavigateToAuthorizationCommand { get; }  // Навигация между View
+  public RelayCommand RegistrationClientCommand { get; }        // Добавление в базу данных
+  public RelayCommand NavigateToAuthorizationCommand { get; }   // Переход на страницу авторизации
   #endregion
   
   /* Конструктор класса */

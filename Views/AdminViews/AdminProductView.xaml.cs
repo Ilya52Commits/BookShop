@@ -13,6 +13,6 @@ public partial class AdminProductView : Page
   {
     InitializeComponent();
 
-    //DataContext = new AdminProductViewModel(user);
+    DataContext = new AdminProductViewModel(user);
   }
 }
