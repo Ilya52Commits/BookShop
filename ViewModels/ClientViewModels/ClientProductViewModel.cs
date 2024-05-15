@@ -10,6 +10,7 @@ namespace BookShopCore.ViewModels.ClientViewModels;
 /* Главный класс ViewModel страницы продуктов для клиента */
 internal sealed class ClientProductViewModel : BaseViewModel
 {
+  #region Параметры класса
   /* Переменная модели для взаимодействия с данными */
   private readonly DbContext _dbContext;
 
@@ -32,6 +33,7 @@ internal sealed class ClientProductViewModel : BaseViewModel
   public RelayCommand<Book> AddToBascketCommand { get; set; }       // Команда купить
   public RelayCommand NavigateToBasketCommand { get; set; }         // Переход на страницу корзины
   public RelayCommand NavigateToAuthorizationCommand { get; set; }  // Переход на страницу авторизации
+  #endregion
 
   /* Конструктор по умолчанию */
   public ClientProductViewModel(User user)
@@ -47,6 +49,7 @@ internal sealed class ClientProductViewModel : BaseViewModel
     NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationCommandExecute); // Инициалзиация команды перехода на авторизацию
   }
 
+  #region Методы класса
   /// <summary>
   /// Метод перехода на страницу авторизации
   /// </summary>
@@ -91,5 +94,6 @@ internal sealed class ClientProductViewModel : BaseViewModel
     // Сохранение изменений
     _dbContext.SaveChanges();
   }
+  #endregion
   #endregion
 }

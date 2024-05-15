@@ -1,6 +1,6 @@
-﻿using BookShopCore.ViewModels.ClientViewModels;
+﻿using BookShopCore.Model;
+using BookShopCore.ViewModels.ClientViewModels;
 using System.Windows.Controls;
-using BookShopCore.Model;
 
 namespace BookShopCore.Views.ClientViews;
 

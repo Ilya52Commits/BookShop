@@ -6,6 +6,7 @@ using BookShopCore.Views.AdminViews;
 using BookShopCore.Views.ClientViews;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
+using BookShopCore.Views.ManagerViews;
 
 namespace BookShopCore.ViewModels;
 
@@ -16,13 +17,13 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
    Ключ - имя свойства; 
    Значение - список сообщений об ошибках */
   private readonly Dictionary<string, List<string>> _errors = new();
-  
+
   /* Это свойство, которое возвращает true, если есть ошибки валидации, и false, если ошибок нет */
-  public bool HasErrors => _errors.Count > 0; 
-  
+  public bool HasErrors => _errors.Count > 0;
+
   /* Событие, которое вызывается при изменении ошибок валидации */
   public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-  
+
   /// <summary>
   /// Метод, который возвращает список ошибок валидации для указанного свойства
   /// </summary>
@@ -34,11 +35,11 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
     if (propertyName != null && _errors.TryGetValue(propertyName, out var value))
       // то метод возвращает список ошибок, связанных с указанным свойством
       return value;
-    
+
     // Метод возвращает пустой список
     return Enumerable.Empty<string>();
   }
-  
+
   /// <summary>
   /// Метод, который выполняет валидацию указанного свойства
   /// </summary>
@@ -47,9 +48,9 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
   private void Validate(string propertyName, object propertyValue)
   {
     var results = new List<ValidationResult>(); // Список результата валидации
-    
+
     // Выполняется валидация значения propertyValue для указанного свойства propertyName
-    Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName}, results);
+    Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName }, results);
 
     // Если список результатов не пустой
     if (results.Count != 0)
@@ -68,7 +69,7 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
     }
   }
   #endregion
-  
+
   /* Переменная модели для взаимодействия с данными */
   private readonly DbContext _dbContext;
 
@@ -130,7 +131,7 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
     NavigateToRegistrationCommand = new RelayCommand(NavigateToRegistrationCommandExecute); // Инициализация команды перехода на страницу регистрации
   }
 
-  #region Методы
+  #region Методы класса
   /// <summary>
   /// Метод перехода на страницу регистрации
   /// </summary>
@@ -152,51 +153,81 @@ internal sealed class AuthorizationViewModel : BaseViewModel, INotifyDataErrorIn
     if (_login == "Admin" && _password == "Admin")
     {
       // Выполнение запроса к бд для проверки на главного админа
-      var admin = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password
+      var mainAdmin = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password
                                                   && u.Role == "Admin" && u.IsValidateAdmin == true);
 
       // Если пользователь является админом
-      if (admin != null)
+      if (mainAdmin != null)
       {
         // Выводится сообщение приветствие админа
         MessageBox.Show("Здравсвтуйте, создатель!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
 
-        /* Переход на страницу продуктов для админа */
-        // Получение экземпляра главного окна 
-        var mainWindow = Application.Current.MainWindow as MainWindow;
-
-        // Навигирует к View авторизации
-        mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView(_dbContext.Users.First(user => user.Login == "Admin" && user.Password == "Admin" 
-                                                                                                     && user.Role == "Admin" && user.IsValidateAdmin == true)));
-      }
-      // Иначе выводится сообщение, что пользователь не админ
-      else
-        MessageBox.Show("Вы не создатель!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-    }
-    // Иначе проводится поиск обычного пользователя
-    else
-    {
-      // Выполнение запроса к базе данных PostgresSQL для проверки почты и пароля
-      var user = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password);
-
-      // Если польователь нашёлся
-      if (user != null)
-      {
-        // Выводится сообщение об успешном входе в систему
-        MessageBox.Show("Вы успешно вошли в систему!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-
-        /* Переход на страницу продуктов для клиента */
         // Получение экземпляра главного окна 
         var mainWindow = Application.Current.MainWindow as MainWindow;
 
         // Навигирует к View авторизации
         mainWindow?.MainFrame.NavigationService.Navigate(
-          new ClientProductView(_dbContext.Users.First(user1 => user1.Login == _login && user1.Password == _password)));
+          new AdminUserView(_dbContext.Users.First(user => user.Login == "Admin" && user.Password == "Admin" && user.Role == "Admin" && user.IsValidateAdmin == true)));
+
+        return; 
       }
-      // Выводится сообщение об ошибке
+      // Иначе выводится сообщение, что пользователь не админ
       else
-        MessageBox.Show("Почта или пароль не совпадают!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show("Вы не создатель!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
     }
+
+    var admin = _dbContext.Users.FirstOrDefault(admin => admin.Login == _login && admin.Password == _password && admin.Role == "Admin" && admin.IsValidateAdmin == true);
+    if (admin !=  null)
+    {
+      // Выводится сообщение об успешном входе в систему
+      MessageBox.Show("Добрый день, менеджер!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+      // Получение экземпляра главного окна 
+      var mainWindow = Application.Current.MainWindow as MainWindow;
+
+      // Переход на страницу продуктов менеджера
+      mainWindow?.MainFrame.NavigationService.Navigate(
+        new AdminUserView(_dbContext.Users.First(admin => admin.Login == _login && admin.Password == _password && admin.Role == "Admin" && admin.IsValidateAdmin == true)));
+
+      return; 
+    }
+
+    var manager = _dbContext.Users.FirstOrDefault(manager => manager.Login == _login && manager.Password == _password && manager.Role == "Manager");
+    if (manager != null)
+    {
+      // Выводится сообщение об успешном входе в систему
+      MessageBox.Show("Добрый день, менеджер!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+      // Получение экземпляра главного окна 
+      var mainWindow = Application.Current.MainWindow as MainWindow;
+
+      // Переход на страницу продуктов менеджера
+      mainWindow?.MainFrame.NavigationService.Navigate(
+        new ManagerProductView(_dbContext.Users.First(manager => manager.Login == _login && manager.Password == _password && manager.Role == "Manager")));
+
+      return; 
+    }
+
+    // Выполнение запроса к базе данных PostgresSQL для проверки почты и пароля
+    var user = _dbContext.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password);
+    // Если польователь нашёлся
+    if (user != null)
+    {
+      // Выводится сообщение об успешном входе в систему
+      MessageBox.Show("Вы успешно вошли в систему!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+      // Получение экземпляра главного окна 
+      var mainWindow = Application.Current.MainWindow as MainWindow;
+
+      // Навигирует к View авторизации
+      mainWindow?.MainFrame.NavigationService.Navigate(
+        new ClientProductView(_dbContext.Users.First(user => user.Login == _login && user.Password == _password)));
+
+      return;
+    }
+    // Выводится сообщение об ошибке
+    else
+      MessageBox.Show("Почта или пароль не совпадают!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
   }
   #endregion
 }

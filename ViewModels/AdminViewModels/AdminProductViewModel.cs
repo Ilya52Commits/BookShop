@@ -1,12 +1,13 @@
 ﻿using BookShopCore.Model;
-using BookShopCore.Views;
+using BookShopCore.Views.AdminViews;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace BookShopCore.ViewModels.AdminViewModels;
 
-public class AdminProductViewModel : BaseViewModel
+/* Главный класс ViewModel страницы продуктов для админа */
+internal class AdminProductViewModel : BaseViewModel
 {
   /* Переменная для взаимодействия с базой данных */
   private readonly DbContext _dbContext;
@@ -27,7 +28,7 @@ public class AdminProductViewModel : BaseViewModel
   }
 
   /* Описание команд страницы */
-  public RelayCommand NavigateToAuthorizationCommand { get; set; } // Команда перехода на страницу авторизации
+  public RelayCommand NavigateToAdminUserPageCommand { get; set; } // Команда перехода на страницу авторизации
 
   /* Конструктор по умолчанию */
   public AdminProductViewModel(User user)
@@ -38,19 +39,19 @@ public class AdminProductViewModel : BaseViewModel
 
     _books = new ObservableCollection<Book>(_dbContext.Books);  // Инициализация коллекции выбронных книг
 
-    NavigateToAuthorizationCommand = new RelayCommand(NavigateToAuthorizationCommandExecute); // Инициализация команды перехода на страницу авторизации
+    NavigateToAdminUserPageCommand = new RelayCommand(NavigateToAdminUserPageCommandExecute); // Инициализация команды перехода на страницу авторизации
   }
 
   /// <summary>
-  /// Метод перехода на страницу авторизации
+  /// Метод перехода на страницу пользователей админа
   /// </summary>
   /// <exception cref="NotImplementedException"></exception>
-  private void NavigateToAuthorizationCommandExecute()
+  private void NavigateToAdminUserPageCommandExecute()
   {
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainWindow;
 
     // Навигирует к View авторизации
-    mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
+    mainWindow?.MainFrame.NavigationService.Navigate(new AdminUserView(_dbContext.Users.First(user1 => user1.Id == _user.Id)));
   }
 }

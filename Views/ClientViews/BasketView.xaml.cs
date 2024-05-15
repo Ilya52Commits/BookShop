@@ -8,9 +8,13 @@ namespace BookShopCore.Views.ClientViews;
 /// </summary>
 public partial class BasketView
 {
+  private User user;
+
   public BasketView(User user)
   {
     InitializeComponent();
+
+    this.user = user;
 
     DataContext = new BasketViewModel(user);
   }
