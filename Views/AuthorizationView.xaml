@@ -25,12 +25,6 @@
         </Grid.RowDefinitions>
 
         <!-- Создание контейнера -->
-        <Border Style="{DynamicResource BorderContainerStyles}">
-            <!-- Параметры для Border -->
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="20" />
-            </Border.Effect>
-
             <!-- Создание блока входа -->
             <Grid>
                 <!-- Создание содержимого блока -->
@@ -77,6 +71,5 @@
                     </Border>
                 </StackPanel>
             </Grid>
-        </Border>
     </Grid>
 </Page>

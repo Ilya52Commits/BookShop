@@ -1,15 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <!-- Базовые стили -->  
-    <!-- Стили для контейнера -->
-    <Style x:Key="BorderContainerStyles" TargetType="Border">
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="CornerRadius" Value="20"/>
-    </Style>
-    
+    <!-- Базовые стили --> 
     <!-- Стили кнопки перехода навигации -->
     <Style x:Key="ButtonNavigateStyles" TargetType="Button">
         <Setter Property="Padding" Value="10, 7, 10, 7"/>

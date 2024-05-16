@@ -18,7 +18,6 @@
     </Page.DataContext>
 
     <!-- Создание контейнера -->
-    <Border Style="{DynamicResource BorderContainerStyles}">
         <Grid>
             <!-- Параметры для Grid -->
             <Grid.RowDefinitions>
@@ -93,5 +92,4 @@
                 </Border>
             </StackPanel>
         </Grid>
-    </Border>
 </Page>
