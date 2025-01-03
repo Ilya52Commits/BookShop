@@ -2,14 +2,14 @@
 using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
-using BookShop.MVVM.ViewModels;
 using BookShop.MVVM.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
 
-namespace BookShop.ViewModels.ManagerViewModel;
+namespace BookShop.MVVM.ViewModels.ManagerViewModel;
 
-public partial class ManagerProductViewModel : BaseViewModel
+public partial class ManagerProductViewModel : ObservableObject
 {
   /* Переменная для взаимодействия с базой данных */
   private readonly Context _context;
@@ -18,16 +18,8 @@ public partial class ManagerProductViewModel : BaseViewModel
   private readonly User _user;
 
   /* Коллекция книг для обращения к базе данных */
+  [ObservableProperty]
   private readonly ObservableCollection<Book> _books;
-  public ObservableCollection<Book> Books
-  {
-    get => _books;          // Вывод значения
-    protected init          // Изменение значения 
-    {
-      _books = value;       // Присваивание нового значения
-      OnPropertyChanged();  // Вызов события изменения
-    }
-  }
 
   /* Конструктор по умолчанию */
   public ManagerProductViewModel(User user)

@@ -16,12 +16,8 @@ namespace BookShop.MVVM.ViewModels;
 internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyDataErrorInfo // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
 {
   #region Параметры валидации
-  /* Словарь для хранения ошибок валидации.
-   Ключ - имя свойства; 
-   Значение - список сообщений об ошибках */
   private readonly Dictionary<string, List<string>> _errors = new();
   
-  /* Это свойство, которое возвращает true, если есть ошибки валидации, и false, если ошибок нет */
   public bool HasErrors => _errors.Count > 0; 
   
   /* Событие, которое вызывается при изменении ошибок валидации */
@@ -75,10 +71,11 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   
   #region Поля класса
   /* Переменная модели для взаимодействия с данными */
-  private readonly Context _context;
+  private readonly Context _context = new(); // Создание объекта модели бд
 
   /* Описания параметров для Login */
-  private string _login;
+  private string _login = string.Empty; // Инициализация _login
+
   [Required(ErrorMessage = "Недопустимый логин")]
   public string Login
   {
@@ -93,7 +90,8 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   }
 
   /* Описание параметров для Email */
-  private string _email;
+  private string _email = string.Empty; // Инициализация _email
+
   [Required(ErrorMessage = "Недопустимая почта")]
   public string Email
   {
@@ -107,7 +105,8 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   }
 
   /* Описание параметров для Password */
-  private string _password;
+  private string _password = string.Empty; // Инициализация _password
+
   [Required(ErrorMessage = "Недопустимый пароль")]
   public string Password
   {
@@ -121,7 +120,8 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   }
 
   /* Описание параметров для ConfigPassword */
-  private string _confPassword;
+  private string _confPassword = string.Empty; // Инициализация _confPassword
+
   [Required(ErrorMessage = "Пароль не совпадает")]
   public string ConfigPassword
   {
@@ -135,16 +135,6 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   }
   #endregion
   
-  /* Конструктор класса */
-  public RegistrationViewModel()
-  {
-    _context = new Context(); // Создание объекта модели бд
-
-    _login = string.Empty;        // Инициализация _login
-    _email = string.Empty;        // Инициализация _email
-    _password = string.Empty;     // Инициализация _password
-    _confPassword = string.Empty; // Инициализация _confPassword
-  }
 
   #region Методы класса
   /// <summary>

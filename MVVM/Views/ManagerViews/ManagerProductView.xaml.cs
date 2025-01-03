@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 using BookShop.EntityFramework.Models;
-using BookShop.ViewModels.ManagerViewModel;
+using ManagerProductViewModel = BookShop.MVVM.ViewModels.ManagerViewModel.ManagerProductViewModel;
 
 namespace BookShop.MVVM.Views.ManagerViews;
 

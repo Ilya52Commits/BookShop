@@ -3,13 +3,14 @@ using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
 using BasketView = BookShop.MVVM.Views.ClientViews.BasketView;
 
 namespace BookShop.MVVM.ViewModels.ClientViewModels;
 
-internal sealed partial class ClientProductViewModel : BaseViewModel
+internal sealed partial class ClientProductViewModel : ObservableObject
 {
   #region Параметры класса
   /* Переменная модели для взаимодействия с данными */
@@ -19,16 +20,8 @@ internal sealed partial class ClientProductViewModel : BaseViewModel
   private readonly User _user;
 
   /* Коллекция книг для обращения к базе данных */
+  [ObservableProperty]
   private readonly ObservableCollection<Book>? _books; 
-  public ObservableCollection<Book>? Books
-  {
-    get => _books;          // Вывод значения
-    private init          // Изменение значения 
-    {
-      _books = value;       // Присваивание нового значения
-      OnPropertyChanged();  // Вызов события изменения
-    }
-  }
   #endregion
 
   /* Конструктор по умолчанию */

@@ -3,41 +3,24 @@ using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ClientProductView = BookShop.MVVM.Views.ClientViews.ClientProductView;
 
 namespace BookShop.MVVM.ViewModels.ClientViewModels;
 
-/* Главный класс ViewModel страницы корзины для клиента */
-internal partial class BasketViewModel : BaseViewModel
+internal partial class BasketViewModel(User user) : ObservableObject
 {
   /* Переменная для взаимодействия с базой данных */
-  private readonly Context _context;
+  private readonly Context _context = new();
 
   /* Данные пользователя, вошедшему на страницу */
-  private readonly User _user;
 
   /* Коллекция книг для обращения к базе данных */
-  private readonly ObservableCollection<Book> _selectBook; 
-  public ObservableCollection<Book> SelectBook
-  {
-    get => _selectBook;     // Вывод значения
-    protected init          // Изменение значения
-    {
-      _selectBook = value;  // Присваивание нового значения
-      OnPropertyChanged();  // Вызов события изменения 
-    }
-  }
+  [ObservableProperty]
+  private ObservableCollection<Book> _selectBook = new(user.SelectedBooks); 
   
   /* Конструктор по умолчанию */
-  public BasketViewModel(User user)
-  {
-    _context = new Context();                                       // Инициализация контекста базы данных
-
-    _user = user;                                                       // Инициализация пользователя
-
-    _selectBook = new ObservableCollection<Book>(user.SelectedBooks);   // Инициализация коллекции выбронных книг
-  }
 
   /// <summary>
   /// Метод перехода на страницу продуктов
@@ -49,7 +32,7 @@ internal partial class BasketViewModel : BaseViewModel
     var mainWindow = Application.Current.MainWindow as MainView;
 
     // Навигирует к View авторизации
-    mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView(_context.Users.First(user1 => user1.Id == _user.Id)));
+    mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView(_context.Users.First(user1 => user1.Id == user.Id)));
   }
 
   /// <summary>
@@ -60,7 +43,7 @@ internal partial class BasketViewModel : BaseViewModel
   private void DeleteProduct(Book book)
   {
     // Поиск пользователя, из списка которого будет удалён товар
-    var deletingUser =  _context.Users.First(user => user.Id == _user.Id);
+    var deletingUser =  _context.Users.First(user1 => user1.Id == user.Id);
 
     // Поиск удаляемой книги
     var retrievableBook =  _context.Books.First(book1 => book1.Id == book.Id);
@@ -82,7 +65,7 @@ internal partial class BasketViewModel : BaseViewModel
   private void BuyProduct()
   {
     // Поиск пользователя, который осуществляет покупку
-    var buyingUser = _context.Users.First(user => user.Id == _user.Id);
+    var buyingUser = _context.Users.First(user1 => user1.Id == user.Id);
 
     // Проход по списку товаров
     foreach (var book in _selectBook)

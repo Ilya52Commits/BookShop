@@ -3,40 +3,27 @@ using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AdminUserView = BookShop.MVVM.Views.AdminViews.AdminUserView;
 
 namespace BookShop.MVVM.ViewModels.AdminViewModels;
 
-/* Главный класс ViewModel страницы продуктов для админа */
-internal partial class AdminProductViewModel : BaseViewModel
+internal partial class AdminProductViewModel : ObservableObject
 {
-  /* Переменная для взаимодействия с базой данных */
   private readonly Context _context;
-
-  /* Данные пользователя, вошедшему на страницу */
+  
   private readonly User _user;
-
-  /* Коллекция книг для обращения к базе данных */
+  
+  [ObservableProperty]
   private readonly ObservableCollection<Book> _books;
-  public ObservableCollection<Book> Books
-  {
-    get => _books;          // Вывод значения
-    protected init          // Изменение значения 
-    {
-      _books = value;       // Присваивание нового значения
-      OnPropertyChanged();  // Вызов события изменения
-    }
-  }
   
   /* Конструктор по умолчанию */
   public AdminProductViewModel(User user)
   {
-    _context = new Context();                               // Инициализация контекста базы данных
-
-    _user = user;                                               // Инициализация пользователя
-
-    _books = new ObservableCollection<Book>(_context.Books);  // Инициализация коллекции выбронных книг
+    _context = new Context();
+    _user = user;
+    _books = new ObservableCollection<Book>(_context.Books);
   }
 
   #region Методы класса
