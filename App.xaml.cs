@@ -1,14 +1,15 @@
-﻿using BookShopCore.Model;
-using System.Windows;
+﻿using System.Windows;
+using BookShop.EntityFramework;
+using BookShop.EntityFramework.Models;
 
-namespace BookShopCore;
+namespace BookShop;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
 public partial class App
 {
   /* Переменная для взаимодействия с базой данных */
-  private readonly DbContext _dbContext = new();
+  private readonly Context _context = new();
 
   #region Методы для добавления начальных данных
   /// <summary>
@@ -17,7 +18,7 @@ public partial class App
   private void AddTheMainAdmin()
   {
     // Поиск главного админа в базе данных
-    var admin = _dbContext.Users.FirstOrDefault(a => a.Login == "Admin" && a.Password == "Admin" && a.Email == "Admin" && a.Role == "Admin");
+    var admin = _context.Users.FirstOrDefault(a => a.Login == "Admin" && a.Password == "Admin" && a.Email == "Admin" && a.Role == "Admin");
     // Если он присутствует, то происходит выход из метода
     if (admin != null) return;
 
@@ -31,8 +32,8 @@ public partial class App
     };
 
     // Добавление и сохранение базы данных
-    _dbContext.Add(mainAdmin);
-    _dbContext.SaveChanges();
+    _context.Add(mainAdmin);
+    _context.SaveChanges();
   }
 
   /// <summary>
@@ -40,7 +41,7 @@ public partial class App
   /// </summary>
   private void AddingInitialBookElements()
   {
-    var isBookTableNotEmpty = _dbContext.Books.Any(); // Проверка книг на пустоту
+    var isBookTableNotEmpty = _context.Books.Any(); // Проверка книг на пустоту
 
     // Проверка коллекции на пустоту
     if (isBookTableNotEmpty) return;
@@ -63,11 +64,11 @@ public partial class App
     };
 
     /* Добавление книг в базу данных */
-    _dbContext.Books.Add(firstBook);
-    _dbContext.Books.Add(secondBook);
+    _context.Books.Add(firstBook);
+    _context.Books.Add(secondBook);
 
     // Сохранение изменений
-    _dbContext.SaveChanges();
+    _context.SaveChanges();
   }
   #endregion
 

@@ -1,0 +1,95 @@
+﻿<Page x:Class="BookShop.MVVM.Views.RegistrationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:viewModels1="clr-namespace:BookShop.MVVM.ViewModels"
+      mc:Ignorable="d"
+      Title="RegistrationView">
+
+    <!-- Подключение стилей -->
+    <Page.Resources>
+        <ResourceDictionary Source="../StyleDictionary.xaml"/>
+    </Page.Resources>
+
+    <!-- Подключение ViewModel -->
+    <Page.DataContext >
+        <viewModels1:RegistrationViewModel/>
+    </Page.DataContext>
+
+    <!-- Создание контейнера -->
+        <Grid>
+            <!-- Параметры для Grid -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Создание содержимого блока -->
+            <StackPanel Width="300" Margin="30">
+                <!-- Создание кнопки перехода на страницу авторизацию -->
+                <StackPanel HorizontalAlignment="Left">
+                    <Button Command="{Binding NavigateToAuthorizationCommand}" Style="{DynamicResource ButtonNavigateStyles}" Content="Уже есть аккаунт"/>
+                </StackPanel>
+
+                <!-- Создание заголовка -->
+                <Label Style="{DynamicResource LabelStyles}" Content="РЕГИСТРАЦИЯ" />
+
+                <!-- Создание поля ввода логина -->
+                <StackPanel Margin="0, 10, 0, 0">
+                    <TextBlock Text="Логин" FontSize="20" />
+                    <Border Style="{DynamicResource TextBoxBorderStyles}">
+                        <TextBox x:Name="TextBoxLogin" Text="{Binding Login}" Style="{DynamicResource TextBoxStyles}" />
+                    </Border>
+                    <TextBlock Text="{Binding ElementName=TextBoxLogin,
+                                Path=(Validation.Errors)[0].ErrorContent}"
+                                Foreground="Red" 
+                                FontSize="13" />
+                </StackPanel>
+
+                <!-- Создание поля ввода почты -->
+                <StackPanel Margin="0, 10, 0, 0">
+                    <TextBlock Text="Email" FontSize="20" />
+                    <Border Style="{DynamicResource TextBoxBorderStyles}">
+                        <TextBox x:Name="TextBoxEmail" Text="{Binding Email}" Style="{DynamicResource TextBoxStyles}" />
+                    </Border>
+                    <TextBlock Text="{Binding ElementName=TextBoxEmail,
+                                Path=(Validation.Errors)[0].ErrorContent}"
+                                Foreground="Red" 
+                                FontSize="13" />
+                </StackPanel>
+
+                <!-- Создание поля ввода пароля -->
+                <StackPanel Margin="0, 10, 0, 0">
+                    <TextBlock Text="Пароль" FontSize="20" />
+                    <Border Style="{DynamicResource TextBoxBorderStyles}">
+                        <TextBox x:Name="TextBoxPassword" Text="{Binding Password}" Style="{DynamicResource TextBoxStyles}" />
+                    </Border>
+                    <TextBlock Text="{Binding ElementName=TextBoxPassword,
+                                Path=(Validation.Errors)[0].ErrorContent}"
+                                Foreground="Red" 
+                                FontSize="13" />
+                </StackPanel>
+
+                <!-- Создание поля ввода подтверждения пароля -->
+                <StackPanel Margin="0, 10, 0, 0">
+                    <TextBlock Text="Повторите пароль" FontSize="20" />
+                    <Border Style="{DynamicResource TextBoxBorderStyles}">
+                        <TextBox x:Name="TextBoxConfPassword" Text="{Binding ConfigPassword}" Style="{DynamicResource TextBoxStyles}" />
+                    </Border>
+                    <TextBlock Text="{Binding ElementName=TextBoxConfPassword,
+                                Path=(Validation.Errors)[0].ErrorContent}"
+                                Foreground="Red" 
+                                FontSize="13" />
+                </StackPanel>
+
+                <!-- Создание кнопки обработчика вводимых данных -->
+                <Border Style="{DynamicResource ButtonBorderStyles}">
+                    <Button 
+                                Command="{Binding RegistrationClientCommand}" 
+                                Style="{DynamicResource ButtonStyles}"
+                                Content="Зарегистрироваться"
+                            />
+                </Border>
+            </StackPanel>
+        </Grid>
+</Page>

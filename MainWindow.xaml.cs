@@ -1,16 +1,17 @@
-﻿using BookShopCore.Views;
-using System.Windows;
+﻿using BookShop.Views;
+using RegistrationView = BookShop.MVVM.Views.RegistrationView;
 
-namespace BookShopCore
+namespace BookShop
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class MainWindow
   {
     public MainWindow()
     {
       InitializeComponent();
+      
       MainFrame.NavigationService.Navigate(new RegistrationView());
     }
   }
