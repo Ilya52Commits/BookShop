@@ -2,8 +2,7 @@
 using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
-using BookShop.ViewModels;
-using BookShop.Views.AdminViews;
+using BookShop.MVVM.Views;
 using CommunityToolkit.Mvvm.Input;
 using AdminUserView = BookShop.MVVM.Views.AdminViews.AdminUserView;
 
@@ -52,7 +51,7 @@ internal partial class AdminProductViewModel : BaseViewModel
     _context.SaveChanges();
 
     // Получение экземпляра главного окна
-    var mainWindow = Application.Current.MainWindow as MainWindow;
+    var mainWindow = Application.Current.MainWindow as MainView;
 
     // Навигирует к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AdminUserView(_context.Users.First(user1 => user1.Id == _user.Id)));

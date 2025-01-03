@@ -45,6 +45,11 @@
     <Page Update="MVVM\Views\RegistrationView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Update="MVVM\Views\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

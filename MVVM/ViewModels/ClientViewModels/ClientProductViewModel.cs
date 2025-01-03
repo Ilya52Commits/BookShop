@@ -2,9 +2,7 @@
 using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
-using BookShop.ViewModels;
-using BookShop.Views;
-using BookShop.Views.ClientViews;
+using BookShop.MVVM.Views;
 using CommunityToolkit.Mvvm.Input;
 using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
 using BasketView = BookShop.MVVM.Views.ClientViews.BasketView;
@@ -51,7 +49,7 @@ internal sealed partial class ClientProductViewModel : BaseViewModel
   private void NavigateToAuthorization()
   {
     // Получение экземпляра главного окна
-    var mainWindow = Application.Current.MainWindow as MainWindow;
+    var mainWindow = Application.Current.MainWindow as MainView;
 
     // Навигирует к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
@@ -64,7 +62,7 @@ internal sealed partial class ClientProductViewModel : BaseViewModel
   private void NavigateToBasket()
   {
     // Получение экземпляра главного окна
-    var mainWindow = Application.Current.MainWindow as MainWindow;
+    var mainWindow = Application.Current.MainWindow as MainView;
 
     // Навигирует к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new BasketView(_context.Users.First(user1 => user1.Id == _user.Id)));

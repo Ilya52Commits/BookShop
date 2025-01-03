@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
-using BookShop.Views;
+using BookShop.MVVM.Views;
 using CommunityToolkit.Mvvm.Input;
 using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
 using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
@@ -157,7 +157,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     _context.SaveChanges();
 
     // Получение экземпляра главного окна 
-    var mainWindow = Application.Current.MainWindow as MainWindow;
+    var mainWindow = Application.Current.MainWindow as MainView;
 
     // Навигирует к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());

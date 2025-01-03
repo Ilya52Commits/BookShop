@@ -7,48 +7,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6399ed25-6c42-46f3-808c-0373ac9ceda4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/EntityFramework/Models/Book.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MVVM/ViewModels/ClientViewModels/ClientProductViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Repository/IRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/dataSources/1a082e09-c508-455d-962e-8d8520a6a8a0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/projectSettingsUpdater.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/vcs.xml" beforeDir="false" />
+    <list default="true" id="6399ed25-6c42-46f3-808c-0373ac9ceda4" name="Changes" comment="Изменил структуру проекта">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookShopCore/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/App.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookShopCore.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookShop.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookShopCore.sln" beforeDir="false" afterPath="$PROJECT_DIR$/BookShop.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EntityFramework/Context.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EntityFramework/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/AdminViewModels/AdminProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/AdminViewModels/AdminProductViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/AdminViewModels/AdminUserViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/AdminViewModels/AdminUserViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/AuthorizationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/AuthorizationViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/BaseViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/BaseViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/ClientViewModels/BasketViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/ClientViewModels/BasketViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/ClientViewModels/ClientProductViewModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/ManagerViewModel/ManagerProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/ManagerViewModel/ManagerProductViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/RegistrationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/RegistrationViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/AdminViews/AdminProductView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/AdminViews/AdminProductView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/AdminViews/AdminProductView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/AdminViews/AdminProductView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/AdminViews/AdminUserView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/AdminViews/AdminUserView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/AdminViews/AdminUserView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/AdminViews/AdminUserView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/AuthorizationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/AuthorizationView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/AuthorizationView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/AuthorizationView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/ClientViews/BasketView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ClientViews/BasketView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/ClientViews/BasketView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/ClientViews/ClientProductView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ClientViews/ClientProductView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/ClientViews/ClientProductView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ManagerViews/ManagerProductView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/ManagerViews/ManagerProductView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ManagerViews/ManagerProductView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/ManagerViews/ManagerProductView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/RegistrationView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/RegistrationView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/RegistrationView.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookShop.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookShop.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EntityFramework/Context.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EntityFramework/Context.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EntityFramework/Models/Book.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EntityFramework/Models/Book.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EntityFramework/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EntityFramework/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/ViewModels/AdminViewModels/AdminProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/AdminViewModels/AdminProductViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/ViewModels/AdminViewModels/AdminUserViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/AdminViewModels/AdminUserViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/ViewModels/AuthorizationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/AuthorizationViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/ViewModels/ClientViewModels/BasketViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/ClientViewModels/BasketViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/ViewModels/ClientViewModels/ClientProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/ClientViewModels/ClientProductViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/ViewModels/ManagerViewModel/ManagerProductViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/ManagerViewModel/ManagerProductViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/ViewModels/RegistrationViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/ViewModels/RegistrationViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/Views/AuthorizationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/AuthorizationView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/Views/ManagerViews/ManagerProductView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/ManagerViews/ManagerProductView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/Views/ManagerViews/ManagerProductView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/ManagerViews/ManagerProductView.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MVVM/Views/RegistrationView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/RegistrationView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/MainView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MVVM/Views/MainView.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +35,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DpaMonitoringSettings">
-    <option name="autoShow" value="false" />
+    <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,6 +53,9 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/32af53f9addbd8407e5f571f6439ce341f8ba46c7f085f2d1c1aa4c2bd1d35/ModelValidator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/38ad98c9d60c1739a82dce92fa559af31b833496d8d3fba4a86361ff05bf017/XamlReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4d1ffc2032a6984c67eeddf6f03e71acc7e3a339b3f82d3822f7c576ef1b3b/ProxyBindingRewriter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ad49093fbcdcf5c1455da627b83f3c367b31b18719d89c897f2d26d2a8b/WpfXamlLoader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/App.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/EntityFramework/Context.cs" root0="FORCE_HIGHLIGHTING" />
@@ -85,14 +67,15 @@
     <setting file="file://$PROJECT_DIR$/MVVM/Views/ClientViews/BasketView.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MVVM/Views/ClientViews/ClientProductView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MVVM/Views/ClientViews/ClientProductView.xaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MVVM/Views/MainView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MVVM/Views/RegistrationView.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../RestaurantProgram/RestaurantProgram/EntityFramework/Context.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../RestaurantProgram/RestaurantProgram/EntityFramework/Models/Menu.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../RestaurantProgram/RestaurantProgram/Repositories/IRepository.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -170,7 +153,7 @@
       <workItem from="1715715213394" duration="4447000" />
       <workItem from="1715788678996" duration="211000" />
       <workItem from="1715849126168" duration="2962000" />
-      <workItem from="1735938895554" duration="1433000" />
+      <workItem from="1735938895554" duration="2774000" />
     </task>
     <task id="LOCAL-00001" summary="Провёл рефакторинг кода">
       <option name="closed" value="true" />
@@ -220,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715719755845</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Изменил структуру проекта">
+      <option name="closed" value="true" />
+      <created>1735940380081</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1735940380081</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +238,8 @@
     <MESSAGE value="Добавил валидацию для пустого значения ввода" />
     <MESSAGE value="Прописывание вывода сообщения при валидации; создание валидации при аутентификации" />
     <MESSAGE value="Доделал удаление элемента в корзине" />
-    <option name="LAST_COMMIT_MESSAGE" value="Доделал удаление элемента в корзине" />
+    <MESSAGE value="Изменил структуру проекта" />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменил структуру проекта" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

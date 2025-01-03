@@ -5,10 +5,10 @@ namespace BookShop.EntityFramework.Models;
 /// </summary>
 public class User
 {
-  public int Id { get; init; }
+  public int Id { get; set; }
   public string? Login { get; init; }
   public string? Email { get; init; }
   public string? Password { get; init; }
   public string? Role { get; init; }
-  public ICollection<Book> SelectedBooks { get; init; } = []; 
+  public virtual ICollection<Book> SelectedBooks { get; } = []; 
 }

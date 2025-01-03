@@ -2,7 +2,7 @@
 using BookShop.EntityFramework.Models;
 using BookShop.ViewModels.ManagerViewModel;
 
-namespace BookShop.Views.ManagerViews;
+namespace BookShop.MVVM.Views.ManagerViews;
 
 /// <summary>
 /// Логика взаимодействия для ManagerProductView.xaml

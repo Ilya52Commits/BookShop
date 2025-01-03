@@ -3,7 +3,7 @@ using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.ViewModels;
-using BookShop.Views;
+using BookShop.MVVM.Views;
 using CommunityToolkit.Mvvm.Input;
 using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
 
@@ -51,7 +51,7 @@ public partial class ManagerProductViewModel : BaseViewModel
     _context.SaveChanges();
 
     // Получение экземпляра главного окна
-    var mainWindow = Application.Current.MainWindow as MainWindow;
+    var mainWindow = Application.Current.MainWindow as MainView;
 
     // Навигирует к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());

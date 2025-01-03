@@ -9,7 +9,7 @@
 
     <!-- Подключение стилей -->
     <Page.Resources>
-        <ResourceDictionary Source="../StyleDictionary.xaml"/>
+        <ResourceDictionary Source="E:\BookShop\StyleDictionary.xaml"/>
     </Page.Resources>
 
     <!-- Подключение ViewModel -->

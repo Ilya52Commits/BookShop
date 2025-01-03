@@ -3,14 +3,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using BookShop.EntityFramework;
-using BookShop.ViewModels;
-using BookShop.Views;
-using BookShop.Views.AdminViews;
-using BookShop.Views.ClientViews;
-using BookShop.Views.ManagerViews;
+using BookShop.MVVM.Views;
 using CommunityToolkit.Mvvm.Input;
 using AdminUserView = BookShop.MVVM.Views.AdminViews.AdminUserView;
 using ClientProductView = BookShop.MVVM.Views.ClientViews.ClientProductView;
+using ManagerProductView = BookShop.MVVM.Views.ManagerViews.ManagerProductView;
 using RegistrationView = BookShop.MVVM.Views.RegistrationView;
 
 namespace BookShop.MVVM.ViewModels;
@@ -131,7 +128,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
   private static void NavigateToRegistrationCommandExecute()
   {
     // Получение экземпляра главного окна
-    var mainWindow = Application.Current.MainWindow as MainWindow;
+    var mainWindow = Application.Current.MainWindow as MainView;
 
     // Навигирует к View регистрации
     mainWindow?.MainFrame.NavigationService.Navigate(new RegistrationView());
@@ -157,7 +154,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
         MessageBox.Show("Здравсвтуйте, создатель!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
 
         // Получение экземпляра главного окна 
-        var mainWindow = Application.Current.MainWindow as MainWindow;
+        var mainWindow = Application.Current.MainWindow as MainView;
 
         // Навигирует к View авторизации
         mainWindow?.MainFrame.NavigationService.Navigate(
@@ -177,7 +174,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
       MessageBox.Show("Добрый день, админ!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
 
       // Получение экземпляра главного окна 
-      var mainWindow = Application.Current.MainWindow as MainWindow;
+      var mainWindow = Application.Current.MainWindow as MainView;
 
       // Переход на страницу продуктов менеджера
       mainWindow?.MainFrame.NavigationService.Navigate(
@@ -193,7 +190,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
       MessageBox.Show("Добрый день, менеджер!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
 
       // Получение экземпляра главного окна 
-      var mainWindow = Application.Current.MainWindow as MainWindow;
+      var mainWindow = Application.Current.MainWindow as MainView;
 
       // Переход на страницу продуктов менеджера
       mainWindow?.MainFrame.NavigationService.Navigate(
@@ -211,7 +208,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
       MessageBox.Show("Вы успешно вошли в систему!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
 
       // Получение экземпляра главного окна 
-      var mainWindow = Application.Current.MainWindow as MainWindow;
+      var mainWindow = Application.Current.MainWindow as MainView;
 
       // Навигирует к View авторизации
       mainWindow?.MainFrame.NavigationService.Navigate(
