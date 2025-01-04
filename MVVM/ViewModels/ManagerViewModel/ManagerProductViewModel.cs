@@ -1,37 +1,44 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using BookShop.Repository;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
 
 namespace BookShop.MVVM.ViewModels.ManagerViewModel;
 
+/// <summary>
+/// Реализация ViewModel менеджера
+/// </summary>
 public partial class ManagerProductViewModel : ObservableObject
 {
+  #region Свойства
+
   /* Переменная для взаимодействия с базой данных */
-  private readonly Context _context;
+  private readonly MsSqlBookRepository _contextBook;
 
   /* Данные пользователя, вошедшему на страницу */
   private readonly User _user;
 
   /* Коллекция книг для обращения к базе данных */
-  [ObservableProperty]
-  private readonly ObservableCollection<Book> _books;
+  [ObservableProperty] private readonly ObservableCollection<Book> _books;
+
+  #endregion
 
   /* Конструктор по умолчанию */
   public ManagerProductViewModel(User user)
   {
-    _context = new Context();                               // Инициализация контекста базы данных
+    _contextBook = new MsSqlBookRepository();
 
-    _user = user;                                               // Инициализация пользователя
+    _user = user;
 
-    _books = new ObservableCollection<Book>(_context.Books);  // Инициализация коллекции выбронных книг
+    _books = new ObservableCollection<Book>(_contextBook.GetObjectList());
   }
 
-  #region Методы класса
+  #region Реализация команд
+
   /// <summary>
   /// Метод перехода на страницу пользователей админа
   /// </summary>
@@ -40,12 +47,12 @@ public partial class ManagerProductViewModel : ObservableObject
   private void NavigateToAuthorization()
   {
     // Сохранение изменений
-    _context.SaveChanges();
+    _contextBook.Save();
 
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainView;
 
-    // Навигирует к View авторизации
+    // Переходит к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
   }
 
@@ -55,21 +62,12 @@ public partial class ManagerProductViewModel : ObservableObject
   [RelayCommand]
   private void AddNewBook()
   {
-    // Создание пустого обхъекта новой книги
-    var newBook = new Book
-    {
-      Name = string.Empty,    // Создание пустого названия книги
-      Author = string.Empty,  // Создание пустого имени автора
-      Genre = string.Empty,   // Создание пустого названия жанра
-      Price = 0,              // Создание нулевой цены
-    };
-
     /* Взаимодействие с базой данных */
-    _context.Books.Add(newBook);      // Добавление объекта в базу данных
-    _context.SaveChanges();           // Сохранение изменений
+    _contextBook.Create(new Book()); // Добавление объекта в базу данных
+    _contextBook.Save(); // Сохранение изменений
 
     // Добавление в список
-    _books.Add(newBook);
+    Books.Add(new Book());
   }
 
   /// <summary>
@@ -80,13 +78,13 @@ public partial class ManagerProductViewModel : ObservableObject
   private void DeleteProduct(Book book)
   {
     // Удаление книги
-    _context.Remove(book);
+    _contextBook.Delete(book.Id);
     // Обновление базы данных
-    _context.SaveChanges();
+    _contextBook.Save();
 
-    // Удаления из колекции для отображения
-    _books.Remove(book);
+    // Удаления из коллекции для отображения
+    Books.Remove(book);
   }
+
   #endregion
 }
-

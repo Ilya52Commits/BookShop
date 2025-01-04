@@ -3,6 +3,7 @@ using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using BookShop.Repository;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
@@ -13,8 +14,11 @@ namespace BookShop.MVVM.ViewModels.ClientViewModels;
 internal sealed partial class ClientProductViewModel : ObservableObject
 {
   #region Параметры класса
-  /* Переменная модели для взаимодействия с данными */
-  private readonly Context _context;
+  /* Контекст для взаимодействия с моделью книг */
+  private readonly MsSqlBookRepository _contextBook;
+  
+  /* Контекст для взаимодействия с моделью книги */
+  private readonly MsSqlUserRepository _contextUser;
 
   /* Данные пользователя, вошедшему на страницу */
   private readonly User _user;
@@ -27,11 +31,11 @@ internal sealed partial class ClientProductViewModel : ObservableObject
   /* Конструктор по умолчанию */
   public ClientProductViewModel(User user)
   {
-    _context = new Context();
+    _contextBook = new MsSqlBookRepository();
 
     _user = user;
 
-    Books = new ObservableCollection<Book>(_context.Books); 
+    Books = new ObservableCollection<Book>(_contextBook.GetObjectList()); 
   }
 
   #region Методы класса
@@ -39,12 +43,12 @@ internal sealed partial class ClientProductViewModel : ObservableObject
   /// Метод перехода на страницу авторизации
   /// </summary>
   [RelayCommand]
-  private void NavigateToAuthorization()
+  private static void NavigateToAuthorization()
   {
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainView;
 
-    // Навигирует к View авторизации
+    // Переходит к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
   }
 
@@ -57,8 +61,8 @@ internal sealed partial class ClientProductViewModel : ObservableObject
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainView;
 
-    // Навигирует к View авторизации
-    mainWindow?.MainFrame.NavigationService.Navigate(new BasketView(_context.Users.First(user1 => user1.Id == _user.Id)));
+    // Переходит к View авторизации
+    mainWindow?.MainFrame.NavigationService.Navigate(new BasketView(_contextUser.GetObject(_user.Id)));
   }
 
   /// <summary>
@@ -68,7 +72,7 @@ internal sealed partial class ClientProductViewModel : ObservableObject
   private void AddToBasket(Book book)
   {
     // Поиск списка выбранных товаров у пользователя
-    var userSelectedBooks = _context.Users.First(user => user.Id == _user.Id).SelectedBooks;
+    var userSelectedBooks = _contextUser.GetObject(_user.Id).SelectedBooks;
 
     // Поиск элемента товара
     var isAlreadyHave = userSelectedBooks.Contains(book);
@@ -79,7 +83,7 @@ internal sealed partial class ClientProductViewModel : ObservableObject
     userSelectedBooks.Add(book);
 
     // Сохранение изменений
-    _context.SaveChanges();
+    _contextUser.Save();
   }
   #endregion
 }

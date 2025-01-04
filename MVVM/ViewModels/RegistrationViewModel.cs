@@ -3,26 +3,31 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Windows;
-using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using BookShop.Repository;
 using CommunityToolkit.Mvvm.Input;
 using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
 using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 
 namespace BookShop.MVVM.ViewModels;
 
-/* Главный клас ViewModel регистрации */
-internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyDataErrorInfo // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
+/// <summary>
+/// Реализация ViewModel регистрации
+/// </summary>
+internal sealed partial class
+  RegistrationViewModel : BaseViewModel,
+  INotifyDataErrorInfo // Наследуем от ViewModel BaseViewModel для INotifyPropertyChanged
 {
   #region Параметры валидации
+
   private readonly Dictionary<string, List<string>> _errors = new();
-  
-  public bool HasErrors => _errors.Count > 0; 
-  
+
+  public bool HasErrors => _errors.Count > 0;
+
   /* Событие, которое вызывается при изменении ошибок валидации */
   public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-  
+
   /// <summary>
   /// Метод, который возвращает список ошибок валидации для указанного свойства
   /// </summary>
@@ -34,11 +39,11 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     if (propertyName != null && _errors.TryGetValue(propertyName, out var value))
       // то метод возвращает список ошибок, связанных с указанным свойством
       return value;
-    
+
     // Метод возвращает пустой список
     return Enumerable.Empty<string>();
   }
-  
+
   /// <summary>
   /// Метод, который выполняет валидацию указанного свойства
   /// </summary>
@@ -47,9 +52,9 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   private void Validate(string propertyName, object propertyValue)
   {
     var results = new List<ValidationResult>(); // Список результата валидации
-    
+
     // Выполняется валидация значения propertyValue для указанного свойства propertyName
-    Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName}, results);
+    Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName }, results);
 
     // Если список результатов не пустой
     if (results.Count != 0)
@@ -67,30 +72,32 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
       ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
     }
   }
+
   #endregion
-  
+
   #region Поля класса
+
   /* Переменная модели для взаимодействия с данными */
-  private readonly Context _context = new(); // Создание объекта модели бд
+  private readonly MsSqlUserRepository _contextUser = new();
 
   /* Описания параметров для Login */
-  private string _login = string.Empty; // Инициализация _login
+  private string _login = string.Empty;
 
   [Required(ErrorMessage = "Недопустимый логин")]
   public string Login
   {
-    get => _login;                    // Вывод значения
+    get => _login;
 
-    set                               // Изменение значения
+    set
     {
-      _login = value;                 // Присваивание нового значения
-      Validate(nameof(Login), value); // Применение метода валидации
-      OnPropertyChanged();            // Вызов события изменения
+      _login = value;
+      Validate(nameof(Login), value);
+      OnPropertyChanged(nameof(Login));
     }
   }
 
   /* Описание параметров для Email */
-  private string _email = string.Empty; // Инициализация _email
+  private string _email = string.Empty;
 
   [Required(ErrorMessage = "Недопустимая почта")]
   public string Email
@@ -100,7 +107,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     {
       _email = value;
       Validate(nameof(Email), value);
-      OnPropertyChanged(); 
+      OnPropertyChanged(nameof(Email));
     }
   }
 
@@ -115,7 +122,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     {
       _password = value;
       Validate(nameof(Password), value);
-      OnPropertyChanged();
+      OnPropertyChanged(nameof(Password));
     }
   }
 
@@ -130,13 +137,14 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     {
       _confPassword = value;
       Validate(nameof(ConfigPassword), value);
-      OnPropertyChanged();
+      OnPropertyChanged(nameof(ConfigPassword));
     }
   }
+
   #endregion
-  
 
   #region Методы класса
+
   /// <summary>
   /// Метод для навигации между View
   /// </summary>
@@ -144,12 +152,12 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   private void NavigateToAuthorization()
   {
     // Сохраняет изменения в базе данных
-    _context.SaveChanges();
+    _contextUser.Save();
 
     // Получение экземпляра главного окна 
     var mainWindow = Application.Current.MainWindow as MainView;
 
-    // Навигирует к View авторизации
+    // Переходит к View авторизации
     mainWindow?.MainFrame.NavigationService.Navigate(new AuthorizationView());
   }
 
@@ -162,22 +170,22 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     // Проверка условий валидации вводимых данных
     if (!IsLoginValidation(_login) || !IsEmailValidation(_email) || !IsPasswordValidation(_password, _confPassword))
     {
-      // Вывод сообщения об обишке
-      MessageBox.Show("Некоректные данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+      // Вывод сообщения об ошибке
+      MessageBox.Show("Некорректные данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
       return;
     }
 
     // Создание объекта модели User
     var newUser = new User
     {
-      Login = _login,       // Присваивание логина
-      Email = _email,       // Присваивание почты
-      Password = _password, // Присваивание пароля
-      Role = "Client",      // Выставление типа пользователя "по умолчанию"
+      Login = _login,
+      Email = _email,
+      Password = _password,
+      Role = "Client"
     };
 
     // Создание нового пользователя в базе
-    _context.Users.Add(newUser);
+    _contextUser.Create(newUser);
 
     // Вывод сообщения об успешной регистрации
     MessageBox.Show("Регистрация прошла успешно!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -187,6 +195,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   }
 
   #region Методя проверки валидности вводимых данных
+
   /// <summary>
   /// Выполняет проверку валидности логина
   /// </summary>
@@ -208,9 +217,8 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     }
 
     if (!char.IsLower(login[0])) return true;
-    MessageBox.Show("Логин должен быть с большёй буквы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+    MessageBox.Show("Логин должен быть с большой буквы!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
     return false;
-
   }
 
   /// <summary>
@@ -222,7 +230,7 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
   {
     if (!email.Contains('@'))
     {
-      MessageBox.Show("Вы указали некоректную почту!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+      MessageBox.Show("Вы указали некорректную почту!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
       return false;
     }
 
@@ -230,13 +238,12 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     if (emailSplitArray.Length >= 2 && emailSplitArray[1].Split('.').Length >= 2
                                     && emailSplitArray[1].Split('.')[0].Length >= 2 &&
                                     emailSplitArray[1].Split('.')[1].Length >= 2) return true;
-    MessageBox.Show("Вы указали некоректную почту!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+    MessageBox.Show("Вы указали некорректную почту!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
     return false;
-
   }
 
   /// <summary>
-  /// Выполняет проверку валиндости пароля
+  /// Выполняет проверку валидности пароля
   /// </summary>
   /// <param name="password"></param>
   /// <param name="confPassword"></param>
@@ -260,14 +267,15 @@ internal sealed partial class RegistrationViewModel : BaseViewModel, INotifyData
     if (password == confPassword) return true;
     MessageBox.Show("Пароли не совпадают!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
     return false;
-
   }
 
   [GeneratedRegex(@"[\d\W]")]
   private static partial Regex MyRegex();
+
   [GeneratedRegex("[А-Яа-яЁё]")]
   private static partial Regex MyRegex1();
-  #endregion
+
   #endregion
 
+  #endregion
 }

@@ -1,26 +1,34 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using BookShop.Repository;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ClientProductView = BookShop.MVVM.Views.ClientViews.ClientProductView;
 
 namespace BookShop.MVVM.ViewModels.ClientViewModels;
 
+/// <summary>
+/// Реализация ViewModel корзины
+/// </summary>
+/// <param name="user"></param>
 internal partial class BasketViewModel(User user) : ObservableObject
 {
-  /* Переменная для взаимодействия с базой данных */
-  private readonly Context _context = new();
+  #region Свойства
 
-  /* Данные пользователя, вошедшему на страницу */
+  /* Контекст для взаимодействия с моделью пользователя */
+  private readonly MsSqlUserRepository _contextUser = new();
+
+  /* Контекст для взаимодействия с моделью книги */
+  private readonly MsSqlBookRepository _contextBook = new();
 
   /* Коллекция книг для обращения к базе данных */
-  [ObservableProperty]
-  private ObservableCollection<Book> _selectBook = new(user.SelectedBooks); 
-  
-  /* Конструктор по умолчанию */
+  [ObservableProperty] private ObservableCollection<Book> _selectBook = new(user.SelectedBooks);
+
+  #endregion
+
+  #region Реализация команд
 
   /// <summary>
   /// Метод перехода на страницу продуктов
@@ -32,7 +40,7 @@ internal partial class BasketViewModel(User user) : ObservableObject
     var mainWindow = Application.Current.MainWindow as MainView;
 
     // Навигирует к View авторизации
-    mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView(_context.Users.First(user1 => user1.Id == user.Id)));
+    mainWindow?.MainFrame.NavigationService.Navigate(new ClientProductView(_contextUser.GetObject(user.Id)));
   }
 
   /// <summary>
@@ -43,19 +51,19 @@ internal partial class BasketViewModel(User user) : ObservableObject
   private void DeleteProduct(Book book)
   {
     // Поиск пользователя, из списка которого будет удалён товар
-    var deletingUser =  _context.Users.First(user1 => user1.Id == user.Id);
+    var deletingUser = _contextUser.GetObject(user.Id);
 
     // Поиск удаляемой книги
-    var retrievableBook =  _context.Books.First(book1 => book1.Id == book.Id);
+    var retrievableBook = _contextBook.GetObject(book.Id);
 
     // Удаление книги
     deletingUser.SelectedBooks.Remove(retrievableBook);
- 
+
     // Удаления из колекции для отображения
-    _selectBook.Remove(book);
+    SelectBook.Remove(book);
 
     // Обновление базы данных
-    _context.SaveChanges();
+    _contextUser.Save();
   }
 
   /// <summary>
@@ -65,24 +73,26 @@ internal partial class BasketViewModel(User user) : ObservableObject
   private void BuyProduct()
   {
     // Поиск пользователя, который осуществляет покупку
-    var buyingUser = _context.Users.First(user1 => user1.Id == user.Id);
+    var buyingUser = _contextUser.GetObject(user.Id);
 
     // Проход по списку товаров
-    foreach (var book in _selectBook)
+    foreach (var book in SelectBook)
     {
       // Поиск книги для покупки
-      var shoppableBook = _context.Books.First(book1 => book1.Id == book.Id);
+      var shoppableBook = _contextBook.GetObject(book.Id);
       // Удаление книги из списка выбранных
       buyingUser.SelectedBooks.Remove(shoppableBook);
     }
-    
+
     // Очистка списка для отображения
-    _selectBook.Clear();
-    
+    SelectBook.Clear();
+
     // Сохранение изменений
-    _context.SaveChanges();
+    _contextUser.Save();
 
     // Вывод сообщения об успешной покупке
     MessageBox.Show("Вы успешно купили товар!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
   }
+
+  #endregion
 }

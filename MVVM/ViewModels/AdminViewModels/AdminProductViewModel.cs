@@ -3,30 +3,45 @@ using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using BookShop.Repository;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AdminUserView = BookShop.MVVM.Views.AdminViews.AdminUserView;
 
 namespace BookShop.MVVM.ViewModels.AdminViewModels;
 
+/// <summary>
+/// Реализация ViewModel администратора и продукта
+/// </summary>
 internal partial class AdminProductViewModel : ObservableObject
 {
-  private readonly Context _context;
+  #region Свойства
+
+  /* Контекст для взаимодействия с моделью книги */
+  private readonly MsSqlBookRepository _contextBook;
+
+  /* Контекст для взаимодействия с моделью пользователя */
+  private readonly MsSqlUserRepository _contextUser;
   
   private readonly User _user;
-  
-  [ObservableProperty]
-  private readonly ObservableCollection<Book> _books;
-  
+
+  [ObservableProperty] private readonly ObservableCollection<Book> _books;
+
   /* Конструктор по умолчанию */
   public AdminProductViewModel(User user)
   {
-    _context = new Context();
+    _contextBook = new MsSqlBookRepository();
+    _contextUser = new MsSqlUserRepository();
+    
+    _books = new ObservableCollection<Book>(_contextBook.GetObjectList());
+    
     _user = user;
-    _books = new ObservableCollection<Book>(_context.Books);
   }
 
-  #region Методы класса
+  #endregion
+
+  #region Реализация команд
+
   /// <summary>
   /// Метод перехода на страницу пользователей админа
   /// </summary>
@@ -35,13 +50,14 @@ internal partial class AdminProductViewModel : ObservableObject
   private void NavigateToAdminUserPage()
   {
     // Сохранение изменений
-    _context.SaveChanges();
+    _contextBook.Save();
 
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainView;
 
-    // Навигирует к View авторизации
-    mainWindow?.MainFrame.NavigationService.Navigate(new AdminUserView(_context.Users.First(user1 => user1.Id == _user.Id)));
+    // Переходит к View авторизации
+    mainWindow?.MainFrame.NavigationService.Navigate(
+      new AdminUserView(_contextUser.GetObject(_user.Id)));
   }
 
   /// <summary>
@@ -50,37 +66,29 @@ internal partial class AdminProductViewModel : ObservableObject
   [RelayCommand]
   private void AddNewBook()
   {
-    // Создание пустого обхъекта новой книги
-    var newBook = new Book
-    {
-      Name = string.Empty,    // Создание пустого названия книги
-      Author = string.Empty,  // Создание пустого имени автора
-      Genre = string.Empty,   // Создание пустого названия жанра
-      Price = 0,              // Создание нулевой цены
-    };
-
     /* Взаимодействие с базой данных */
-    _context.Books.Add(newBook);      // Добавление объекта в базу данных
-    _context.SaveChanges();           // Сохранение изменений
+    _contextBook.Create(new Book()); // Добавление объекта в базу данных
+    _contextBook.Save(); // Сохранение изменений
 
     // Добавление в список
-    _books.Add(newBook);
+    Books.Add(new Book());
   }
 
   /// <summary>
-  /// Мето удаления товара из корзины
+  /// Метод удаления товара из корзины
   /// </summary>
   /// <param name="book"></param>
   [RelayCommand]
   private void DeleteProduct(Book book)
   {
     // Удаление книги
-    _context.Remove(book);
+    _contextBook.Delete(book.Id);
     // Обновление базы данных
-    _context.SaveChanges();
+    _contextBook.Save();
 
-    // Удаления из колекции для отображения
-    _books.Remove(book);
+    // Удаления из коллекции для отображения
+    Books.Remove(book);
   }
+
   #endregion
 }

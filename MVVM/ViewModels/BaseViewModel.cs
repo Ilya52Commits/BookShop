@@ -2,11 +2,17 @@
 
 namespace BookShop.MVVM.ViewModels;
 
-/* Реализация класса для подключения к INotifyPropertyChanged */ 
+/// <summary>
+/// Реализация класса для подключения к INotifyPropertyChanged
+/// </summary>
 public class BaseViewModel : INotifyPropertyChanged
 {
-  public event PropertyChangedEventHandler? PropertyChanged;  // Создание объекта собития класса PropertyChanged
+  /* Событие INotifyPropertyChanged */
+  public event PropertyChangedEventHandler? PropertyChanged; 
 
-  // Метод для сообщения о событии изменения
+  /// <summary>
+  /// Метод для сообщения о событии изменения
+  /// </summary>
+  /// <param name="propertyName"></param>
   protected virtual void OnPropertyChanged(string? propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

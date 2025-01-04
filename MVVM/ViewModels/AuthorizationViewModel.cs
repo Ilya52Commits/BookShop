@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using BookShop.EntityFramework;
 using BookShop.MVVM.Views;
+using BookShop.Repository;
 using CommunityToolkit.Mvvm.Input;
 using AdminUserView = BookShop.MVVM.Views.AdminViews.AdminUserView;
 using ClientProductView = BookShop.MVVM.Views.ClientViews.ClientProductView;
@@ -16,9 +17,7 @@ namespace BookShop.MVVM.ViewModels;
 internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDataErrorInfo
 {
   #region Параметры валидации
-  /* Словарь для хранения ошибок валидации.
-   Ключ - имя свойства; 
-   Значение - список сообщений об ошибках */
+  /* Словарь для хранения ошибок валидации */
   private readonly Dictionary<string, List<string>> _errors = new();
 
   /* Это свойство, которое возвращает true, если есть ошибки валидации, и false, если ошибок нет */
@@ -74,21 +73,21 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
   #endregion
 
   /* Переменная модели для взаимодействия с данными */
-  private readonly Context _context = new(); // Создание объекта модели бд
+  private readonly Context _context = new(); 
 
   /* Описание параметров для Login */
-  private string _login = string.Empty; // Инициализация переменной логина
+  private string _login = string.Empty;
 
   // Присвоение сообщения
   [Required(ErrorMessage = "Недопустимый логин")]
-  public string Login                 // Вывод значения
+  public string Login            
   {
-    get => _login;                    // Изменение значения
+    get => _login;                   
     set
     {
-      _login = value;                 // Присваивание нового значения
-      Validate(nameof(Login), value); // Применение метода валидации
-      OnPropertyChanged();            // Вызов события изминения
+      _login = value;             
+      Validate(nameof(Login), value);
+      OnPropertyChanged(nameof(Login));
     }
   }
 
@@ -103,7 +102,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
     {
       _email = value;
       Validate(nameof(Login), value);
-      OnPropertyChanged();
+      OnPropertyChanged(nameof(Email));
     }
   }
 
@@ -116,7 +115,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
     set
     {
       _password = value;
-      OnPropertyChanged();
+      OnPropertyChanged(nameof(Password));
     }
   }
   /* Конструктор по умолчанию */
@@ -130,7 +129,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainView;
 
-    // Навигирует к View регистрации
+    // Переходит к View регистрации
     mainWindow?.MainFrame.NavigationService.Navigate(new RegistrationView());
   }
 
@@ -151,12 +150,12 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
       if (mainAdmin != null)
       {
         // Выводится сообщение приветствие админа
-        MessageBox.Show("Здравсвтуйте, создатель!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+        MessageBox.Show("Здравствуйте, создатель!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
 
         // Получение экземпляра главного окна 
         var mainWindow = Application.Current.MainWindow as MainView;
 
-        // Навигирует к View авторизации
+        // Переходит к View авторизации
         mainWindow?.MainFrame.NavigationService.Navigate(
           new AdminUserView(_context.Users.First(user => user.Login == "Admin" && user.Password == "Admin" && user.Role == "Admin")));
 
@@ -201,7 +200,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
 
     // Выполнение запроса к базе данных PostgresSQL для проверки почты и пароля
     var user = _context.Users.FirstOrDefault(u => u.Login == _login && u.Password == _password);
-    // Если польователь нашёлся
+    // Если пользователь нашёлся
     if (user != null)
     {
       // Выводится сообщение об успешном входе в систему
@@ -210,7 +209,7 @@ internal sealed partial class AuthorizationViewModel : BaseViewModel, INotifyDat
       // Получение экземпляра главного окна 
       var mainWindow = Application.Current.MainWindow as MainView;
 
-      // Навигирует к View авторизации
+      // Переходит к View авторизации
       mainWindow?.MainFrame.NavigationService.Navigate(
         new ClientProductView(_context.Users.First(user => user.Login == _login && user.Password == _password)));
 

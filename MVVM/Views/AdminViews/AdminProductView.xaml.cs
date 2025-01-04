@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using BookShop.EntityFramework.Models;
+﻿using BookShop.EntityFramework.Models;
 using AdminProductViewModel = BookShop.MVVM.ViewModels.AdminViewModels.AdminProductViewModel;
 
 namespace BookShop.MVVM.Views.AdminViews;
@@ -7,7 +6,7 @@ namespace BookShop.MVVM.Views.AdminViews;
 /// <summary>
 /// Логика взаимодействия для AdminProductView.xaml
 /// </summary>
-public partial class AdminProductView : Page
+public partial class AdminProductView
 {
   public AdminProductView(User user)
   {

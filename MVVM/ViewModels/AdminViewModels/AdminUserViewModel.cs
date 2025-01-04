@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using BookShop.EntityFramework;
 using BookShop.EntityFramework.Models;
 using BookShop.MVVM.Views;
+using BookShop.Repository;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AdminProductView = BookShop.MVVM.Views.AdminViews.AdminProductView;
@@ -10,32 +10,36 @@ using AuthorizationView = BookShop.MVVM.Views.AuthorizationView;
 
 namespace BookShop.MVVM.ViewModels.AdminViewModels;
 
+/// <summary>
+/// Реализация ViewModel администратора и пользователя
+/// </summary>
 internal partial class AdminUserViewModel : ObservableObject
 {
   #region Параметры класса
+
   /* Переменная модели для взаимодействия с данными */
-  private readonly Context _context;
+  private readonly MsSqlUserRepository _context;
 
   /* Переменная админа, вошедшего на страницу */
   private readonly User _user;
 
   /* Коллекция пользователей для обращения к базе данных */
-  [ObservableProperty]
-  private readonly ObservableCollection<User> _users;
+  [ObservableProperty] private readonly ObservableCollection<User> _users;
 
   #endregion
 
   /* Конструктор класса */
   public AdminUserViewModel(User user)
   {
-    _context = new Context();
+    _context = new MsSqlUserRepository();
 
     _user = user;
 
-    _users = new ObservableCollection<User>(_context.Users);
+    _users = new ObservableCollection<User>(_context.GetObjectList());
   }
 
   #region Команды
+
   /// <summary>
   /// Метод перехода на страницу продуктов админа
   /// </summary>
@@ -43,13 +47,13 @@ internal partial class AdminUserViewModel : ObservableObject
   [RelayCommand]
   private void NavigateToAdminProductPage()
   {
-    _context.SaveChanges();
+    _context.Save();
 
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainView;
 
     // Переходит к View авторизации
-    mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView(_context.Users.First(user => user.Id == _user.Id)));
+    mainWindow?.MainFrame.NavigationService.Navigate(new AdminProductView(_context.GetObject(_user.Id)));
   }
 
   /// <summary>
@@ -59,7 +63,7 @@ internal partial class AdminUserViewModel : ObservableObject
   [RelayCommand]
   private void NavigateToAuthorization()
   {
-    _context.SaveChanges();
+    _context.Save();
 
     // Получение экземпляра главного окна
     var mainWindow = Application.Current.MainWindow as MainView;
@@ -75,7 +79,7 @@ internal partial class AdminUserViewModel : ObservableObject
   private void UserDeletion(User deletionUser)
   {
     // Если пользователь удаляет себя
-    if (deletionUser.Id == _user.Id) 
+    if (deletionUser.Id == _user.Id)
     {
       // Появляется сообщение о невозможности удаления
       MessageBox.Show("Невозможно удалить себя!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -87,17 +91,18 @@ internal partial class AdminUserViewModel : ObservableObject
     {
       // Появляется сообщение о невозможности удаления
       MessageBox.Show("Невозможно удалить админа!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-      return; 
+      return;
     }
 
     // Удаление пользователя из базы данных
-    _context.Users.Remove(deletionUser);
+    _context.Delete(deletionUser.Id);
 
     // Сохранение изменений
-    _context.SaveChanges();
+    _context.Save();
 
     // Удаление пользователя из списка
-    _users.Remove(deletionUser);
+    Users.Remove(deletionUser);
   }
+
   #endregion
 }
